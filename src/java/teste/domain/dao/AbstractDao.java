@@ -46,6 +46,11 @@ public abstract class AbstractDao<CLAZZ>
         HibernateUtils.getCurrentSession().update(c);
     }
 
+    public void delete(CLAZZ c)
+    {
+        HibernateUtils.getCurrentSession().update(c);
+    }
+
 
 
 }

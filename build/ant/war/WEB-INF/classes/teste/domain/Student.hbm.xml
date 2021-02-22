@@ -13,7 +13,7 @@
       PRIMARY KEY (`id`));
 
     -->
-    <class name="teste.domain.Student" table="student" abstract="true">
+    <class name="teste.domain.User" table="student" abstract="true">
         <meta attribute="scope-class">public abstract</meta>
 
         <id name="id" type="long">
@@ -32,7 +32,7 @@
             <key column="student"/>
             <many-to-many column="unidadeCurricular" class="teste.domain.UnidadeCurricular"/>
         </set>
-        <subclass name="teste.domain.StudentImpl" discriminator-value="StudentImpl"/>
+        <subclass name="teste.domain.UserImpl" discriminator-value="StudentImpl"/>
     </class>
 
     <class name="teste.domain.UnidadeCurricular" table="unidadeCurricular" abstract="true">
@@ -48,7 +48,7 @@
 
         <set name="students" lazy="true" table="students_ucs">
             <key column="unidadeCurricular"/>
-            <many-to-many column="student" class="teste.domain.Student"/>
+            <many-to-many column="student" class="teste.domain.User"/>
         </set>
         <subclass name="teste.domain.UnidadeCurricularImpl" discriminator-value="UnidadeCurricularImpl">
             <subclass name="teste.domain.UnidadeCurricularProjeto" abstract="true">

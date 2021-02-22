@@ -1,4 +1,4 @@
-<%@ page import="teste.domain.StudentImpl" %><%--
+<%@ page import="teste.domain.UserImpl" %><%--
   Created by IntelliJ IDEA.
   User: jmachado
   Date: 02/12/2019
@@ -63,7 +63,7 @@
 
         $scope.addStudent = function(){
             let s = {
-                '@class' : '<%=StudentImpl.class.getName()%>'
+                '@class' : '<%=UserImpl.class.getName()%>'
             }
             $scope.estudantes.push(s);
 
@@ -73,7 +73,7 @@
         $scope.saveStudent = function(s){
 
             send(
-                "core.ServicoStudents",
+                "core.ServicoUser",
                 "addStudent",
                 "#myApp",
                 s,
@@ -93,7 +93,7 @@
         $scope.listStudents = function(){
 
             send(
-                "core.ServicoStudents",
+                "core.ServicoUser",
                 "loadAll",
                 "#myApp",
                 {},

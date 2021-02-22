@@ -1,4 +1,4 @@
-<%@ page import="teste.domain.StudentImpl" %>
+<%@ page import="teste.domain.UserImpl" %>
 <%@ page import="teste.domain.UnidadeCurricularImpl" %><%--
   Created by IntelliJ IDEA.
   User: jmachado
@@ -74,7 +74,7 @@
         $scope.loadStudent = function(){
 
             send(
-                "core.ServicoStudents",
+                "core.ServicoUser",
                 "loadStudent",
                 "#myApp",
                 {
@@ -112,7 +112,7 @@
         $scope.saveStudent = function(){
 
             send(
-                "core.ServicoStudents",
+                "core.ServicoUser",
                 "addStudent",
                 "#myApp",
                 $scope.estudante,
@@ -132,7 +132,7 @@
         $scope.saveUc = function(uc){
 
             send(
-                "core.ServicoStudents",
+                "core.ServicoUser",
                 "addUc",
                 "#myApp",
                 {

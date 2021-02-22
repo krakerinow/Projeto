@@ -5,12 +5,9 @@ import teste.domain.UnidadeCurricularImpl;
 public class DaoFactory
 {
 
-    public static StudentDao createStudentDao()
+    public static UserDao createUserDao()
     {
-        return StudentDao.getInstance();
+        return UserDao.getInstance();
     }
-    public static UnidadeCurricularDao createUnidadeCurricularDao()
-    {
-        return UnidadeCurricularDao.getInstance();
-    }
+
 }
