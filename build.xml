@@ -23,6 +23,10 @@
 			<include name="*.jar"/>
 		</fileset>
 
+		<fileset dir="lib/aspectj">
+			<include name="*.jar"/>
+		</fileset>
+
 		<fileset dir="${TOMCAT_HOME}/lib">
 			<include name="servlet-api.jar"/>
 		</fileset>
