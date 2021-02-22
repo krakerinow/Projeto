@@ -25,12 +25,6 @@ public abstract class AbstractDao<CLAZZ>
         return (CLAZZ) HibernateUtils.getCurrentSession().load(obtainDomainClass(),id);
     }
 
-    public CLAZZ get(Serializable id)
-    {
-        return (CLAZZ) HibernateUtils.getCurrentSession().get(obtainDomainClass(),id);
-    }
-
-
     public void save(CLAZZ c)
     {
         HibernateUtils.getCurrentSession().save(c);

@@ -28,7 +28,7 @@
         <property name="ativo" type="boolean">
             <column name="ativo" default="true"/>
         </property>
-        <set name="unidadeCurriculares" lazy="true" table="students_ucs">
+        <set name="unidadeCurriculares" order-by="nome" lazy="true" table="students_ucs">
             <key column="student"/>
             <many-to-many column="unidadeCurricular" class="teste.domain.UnidadeCurricular"/>
         </set>
@@ -46,7 +46,7 @@
         <property name="numeroDeAluno" type="string"/>
         <property name="relatorio" type="string"/>
 
-        <set name="students" lazy="true" table="students_ucs">
+        <set name="students" order-by="nome" lazy="true" table="students_ucs">
             <key column="unidadeCurricular"/>
             <many-to-many column="student" class="teste.domain.Student"/>
         </set>

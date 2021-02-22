@@ -20,9 +20,6 @@ public class RestServlet extends AbstractServlet
 
         if(req.getContentType().equals("application/json"))
         {
-            resp.setContentType("application/json");
-
-
             String json = InputStreamUtils.stream2string(req.getInputStream());
 
             JSONObject jsonObject = new JSONObject(json);
@@ -48,7 +45,7 @@ public class RestServlet extends AbstractServlet
 
                 response.put("data",ob);
 
-
+                resp.setContentType("application/json");
 
 
                 resp.getWriter().write(response.toString());
@@ -57,11 +54,18 @@ public class RestServlet extends AbstractServlet
 
 
 
-            } catch (Throwable e) {
+            } catch (InstantiationException e) {
                 JSONObject response = new JSONObject();
                 response.put("execute",false);
                 response.put("error:",e.toString());
-                resp.getWriter().write(response.toString());
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
 

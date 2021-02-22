@@ -12,7 +12,7 @@
 
     <filter-mapping>
         <filter-name>UserFilter</filter-name>
-        <url-pattern>/admin/*</url-pattern>
+        <url-pattern>/user/*</url-pattern>
     </filter-mapping>
 
     <servlet>
@@ -24,37 +24,6 @@
         <servlet-name>Rest</servlet-name>
         <servlet-class>teste.web.RestServlet</servlet-class>
     </servlet>
-
-
-
-    <servlet>
-        <servlet-name>action</servlet-name>
-        <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
-        <init-param>
-            <param-name>config</param-name>
-            <param-value>
-                /WEB-INF/struts-default.xml
-            </param-value>
-        </init-param>
-        <init-param>
-            <param-name>debug</param-name>
-            <param-value>2</param-value>
-        </init-param>
-        <init-param>
-            <param-name>detail</param-name>
-            <param-value>2</param-value>
-        </init-param>
-        <init-param>
-            <param-name>nocache</param-name>
-            <param-value>true</param-value>
-        </init-param>
-        <load-on-startup>2</load-on-startup>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>action</servlet-name>
-        <url-pattern>*.do</url-pattern>
-    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
