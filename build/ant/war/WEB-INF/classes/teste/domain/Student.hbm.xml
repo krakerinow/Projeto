@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+
+    <!--
+
+    CREATE TABLE `hibernate`.`student` (
+      `id` BIGINT NOT NULL AUTO_INCREMENT,
+      `nome` VARCHAR(255) NULL,
+      PRIMARY KEY (`id`));
+
+    -->
+    <class name="teste.domain.Student" table="student" abstract="true">
+        <meta attribute="scope-class">public abstract</meta>
+
+        <id name="id" type="long">
+            <generator class="native"/>
+        </id>
+        <discriminator column="discriminator"/>
+        <timestamp source="db" name="updateDate" unsaved-value="null"/>
+        <property name="nome" type="string"/>
+        <property name="numeroDeAluno" type="int">
+            <column name="numeroDeAluno" default="0"/>
+        </property>
+        <property name="ativo" type="boolean">
+            <column name="ativo" default="true"/>
+        </property>
+        <set name="unidadeCurriculares" lazy="true" table="students_ucs">
+            <key column="student"/>
+            <many-to-many column="unidadeCurricular" class="teste.domain.UnidadeCurricular"/>
+        </set>
+        <subclass name="teste.domain.StudentImpl" discriminator-value="StudentImpl"/>
+    </class>
+
+    <class name="teste.domain.UnidadeCurricular" table="unidadeCurricular" abstract="true">
+        <meta attribute="scope-class">public abstract</meta>
+        <id name="id" type="long">
+            <generator class="native"/>
+        </id>
+        <discriminator column="discriminator"/>
+        <timestamp source="db" name="updateDate" unsaved-value="null"/>
+        <property name="nome" type="string"/>
+        <property name="numeroDeAluno" type="string"/>
+        <property name="relatorio" type="string"/>
+
+        <set name="students" lazy="true" table="students_ucs">
+            <key column="unidadeCurricular"/>
+            <many-to-many column="student" class="teste.domain.Student"/>
+        </set>
+        <subclass name="teste.domain.UnidadeCurricularImpl" discriminator-value="UnidadeCurricularImpl">
+            <subclass name="teste.domain.UnidadeCurricularProjeto" abstract="true">
+                <meta attribute="scope-class">public abstract</meta>
+                <property name="dataEntregaRelatorio" type="date"/>
+                <subclass name="teste.domain.UnidadeCurricularProjetoImpl" discriminator-value="UnidadeCurricularProjetoImpl"/>
+            </subclass>
+
+        </subclass>
+    </class>
+</hibernate-mapping>
