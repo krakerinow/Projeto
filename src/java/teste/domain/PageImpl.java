@@ -17,6 +17,11 @@ public class PageImpl extends Page {
             .include("title",Page.class)
             .include("roles",Page.class)
             .include("sections",Page.class)
+            .include("title", Section.class)
+            .include("id", Section.class)
+            .include("components", Page.class)
+            .include("text", ComponentText.class)
+            .include("id", Components.class)
             .create();
 
 
