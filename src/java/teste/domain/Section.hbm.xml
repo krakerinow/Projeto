@@ -19,7 +19,7 @@
             <key column="idSection"/>
             <one-to-many class="teste.domain.ComponentsImpl"/>
         </set>
-        <subclass name="teste.domain.SectionImpl" discriminator-value="SectinImpl"/>
+        <subclass name="teste.domain.SectionImpl" discriminator-value="SectionImpl"/>
     </class>
 
 </hibernate-mapping>
