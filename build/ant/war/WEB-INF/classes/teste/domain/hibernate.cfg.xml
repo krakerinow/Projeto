@@ -39,6 +39,10 @@
             <property name="hibernate.connection.pool_size">3</property>
         -->
         <mapping resource="teste/domain/User.hbm.xml"/>
+        <mapping resource="teste/domain/UserSession.hbm.xml"/>
+        <mapping resource="teste/domain/Page.hbm.xml"/>
+        <mapping resource="teste/domain/Section.hbm.xml"/>
+        <mapping resource="teste/domain/Components.hbm.xml"/>
         <!--<mapping resource="teste/domain/Costumer.hbm.xml"/>-->
 
     </session-factory>

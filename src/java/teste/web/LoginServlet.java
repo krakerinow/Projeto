@@ -32,7 +32,7 @@ public class LoginServlet extends AbstractServlet
                 HttpSession session = req.getSession();
                 session.setAttribute("user", username);
                 session.setAttribute("roles", roles);
-               // session.setMaxInactiveInterval(30*60);
+               session.setMaxInactiveInterval(30*60);
                 Cookie userName = new Cookie("user", username);
                 resp.addCookie(userName);
                 String encodedURL = resp.encodeRedirectURL("home.do");
@@ -42,14 +42,14 @@ public class LoginServlet extends AbstractServlet
                 HttpSession session = req.getSession();
                 session.setAttribute("user", username);
                 session.setAttribute("roles", "guest");
-                //session.setMaxInactiveInterval(30*60);
+                session.setMaxInactiveInterval(30*60);
                 Cookie userName = new Cookie("user", username);
                 resp.addCookie(userName);
                 String encodedURL = resp.encodeRedirectURL("home.do");
                 resp.sendRedirect(encodedURL);
             }
         }else{
-            String encodedURL = resp.encodeRedirectURL("http://localhost:8080/es/login.do?passe_errada");
+            String encodedURL = resp.encodeRedirectURL("http://localhost:8080/es/home.do");
             resp.sendRedirect(encodedURL);
         }
 

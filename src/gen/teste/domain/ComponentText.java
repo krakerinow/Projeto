@@ -1,5 +1,5 @@
 package teste.domain;
-// Generated 23/fev/2021 15:35:26 by Hibernate Tools 3.2.0.b9
+// Generated 23-Feb-2021 20:48:02 by Hibernate Tools 3.2.0.b9
 
 
 
