@@ -34,7 +34,7 @@ public class UserImpl extends User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserSession{" +
                 "id=" + getId() +
                 ", nome='" + getNome() + '\'' +
                 ", username='" + getUsername() + '\'' +
