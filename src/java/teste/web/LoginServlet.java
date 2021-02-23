@@ -5,11 +5,14 @@ import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 import teste.domain.User;
 import teste.domain.UserImpl;
+import teste.servicos.login.ServicoLogin;
 import teste.utils.HibernateUtils;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class LoginServlet extends AbstractServlet
@@ -18,22 +21,59 @@ public class LoginServlet extends AbstractServlet
 
     @Override
     protected void doService(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String user = req.getParameter("username");
-        String pass = req.getParameter("password");
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
 
-        logger.info("Recebendo pedido de login do artista: " + user);
-        logger.debug("Recebendo pedido de login do artista com pass " + pass);
+        ServicoLogin sLogin = new ServicoLogin();
 
-        Session sess = HibernateUtils.getCurrentSession();
-        Transaction t = sess.beginTransaction();
-        t.begin();
-        User s = new UserImpl();
-        req.getSession().setAttribute("user",s);
-        s.setNome(user);
-        sess.save(s);
-        t.commit();
+        if(sLogin.Login(username, password ,null)){
+            String roles = sLogin.returnRole();
+            if(roles!=null){
+                HttpSession session = req.getSession();
+                session.setAttribute("user", username);
+                session.setAttribute("roles", roles);
+               // session.setMaxInactiveInterval(30*60);
+                Cookie userName = new Cookie("user", username);
+                resp.addCookie(userName);
+                String encodedURL = resp.encodeRedirectURL("home.do");
+                resp.sendRedirect(encodedURL);
+            }
+            else{
+                HttpSession session = req.getSession();
+                session.setAttribute("user", username);
+                session.setAttribute("roles", "guest");
+                //session.setMaxInactiveInterval(30*60);
+                Cookie userName = new Cookie("user", username);
+                resp.addCookie(userName);
+                String encodedURL = resp.encodeRedirectURL("home.do");
+                resp.sendRedirect(encodedURL);
+            }
+        }else{
+            String encodedURL = resp.encodeRedirectURL("http://localhost:8080/es/login.do?passe_errada");
+            resp.sendRedirect(encodedURL);
+        }
 
 
-        encaminha("/");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

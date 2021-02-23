@@ -16,7 +16,7 @@ public class ServicoLogin {
 
     @Transaction
     @AtributeSession
-    public boolean checkLogin(String user,String pwd, UserSession session) throws ServletException, IOException {
+    public boolean Login(String user,String pwd, UserSession session) throws ServletException, IOException {
 
         //TODO apanhar lista dos users todos
 
