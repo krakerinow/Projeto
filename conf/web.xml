@@ -3,8 +3,6 @@
          xmlns="http://java.sun.com/xml/ns/j2ee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"  >
-
-
     <filter>
         <filter-name>UserFilter</filter-name>
         <filter-class>teste.web.UserFilter</filter-class>
@@ -24,8 +22,6 @@
         <servlet-name>Rest</servlet-name>
         <servlet-class>teste.web.RestServlet</servlet-class>
     </servlet>
-
-
 
     <servlet>
         <servlet-name>action</servlet-name>
@@ -67,17 +63,8 @@
     </servlet-mapping>
 
 
-
-    <error-page>
-        <error-code>404</error-code>
-        <location>/errors/erro404.jsp</location>
-    </error-page>
-
     <!--START FILES-->
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
-        <welcome-file>index2.html</welcome-file>
+        <welcome-file>home.do</welcome-file>
     </welcome-file-list>
-
-   
 </web-app>
