@@ -1,7 +1,5 @@
 package teste.domain.dao;
 
-import teste.domain.UnidadeCurricularImpl;
-
 public class DaoFactory
 {
 
