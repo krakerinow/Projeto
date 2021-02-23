@@ -1,23 +1,28 @@
 package teste.servicos.user;
 
-import org.hibernate.Transaction;
-import org.hibernate.classic.Session;
+//import org.hibernate.Transaction;
+//import org.hibernate.classic.Session;
+import org.hibernate.proxy.HibernateProxy;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import teste.domain.UserImpl;
 import teste.domain.User;
 import teste.domain.dao.DaoFactory;
+import teste.servicepack.security.logic.HasRole;
+import teste.servicepack.security.logic.Transaction;
+import teste.servicepack.security.logic.IsAuthenticated;
+
 import teste.utils.HibernateUtils;
 
 import java.util.List;
 
 public class ServicoUser {
 
+    @Transaction
+    @IsAuthenticated
+    @HasRole(role="admin")
     public JSONObject addUser(JSONObject user){
         UserImpl s = UserImpl.fromJson(user);
-
-        Session sess = HibernateUtils.getCurrentSession();
-        Transaction t = sess.beginTransaction();
 
         if(s.getId() > 0)
         {
@@ -35,18 +40,17 @@ public class ServicoUser {
         }
         else
         {
-            sess.save(s);
+            HibernateUtils.getCurrentSession().save(s);
         }
-        t.commit();
+
 
         return new JSONObject(s.toJson());
     }
 
+    @IsAuthenticated
+    @Transaction
     public JSONArray loadAll(JSONObject dummy)
     {
-        Session sess = HibernateUtils.getCurrentSession();
-        Transaction t = sess.beginTransaction();
-
         List<User> user = DaoFactory.createUserDao().createCriteria().list();
 
         JSONArray resultados = new JSONArray();
@@ -56,9 +60,25 @@ public class ServicoUser {
             resultados.put(new JSONObject(((UserImpl)s).toJson()));
         }
 
-        t.rollback();
+
+       /* for(User u: user) {
+            if(u instanceof HibernateProxy) {
+                resultados.put(new JSONObject(((UserImpl)((HibernateProxy)u).getHibernateLazyInitializer().getImplementation()).toJson()));
+            } else {
+                resultados.put(new JSONObject(((UserImpl)u).toJson()));
+            }*/
 
         return resultados;
     }
+
+    @Transaction
+    @IsAuthenticated
+    @HasRole(role="admin")
+    public void deleteUser(JSONObject user) {
+        User u = (User) HibernateUtils.getCurrentSession().load(User.class, user.getLong("UserID"));
+
+        HibernateUtils.getCurrentSession().delete(u);
+    }
+
 
 }

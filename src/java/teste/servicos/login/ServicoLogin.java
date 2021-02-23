@@ -1,22 +1,21 @@
 package teste.servicos.login;
 
-import org.hibernate.Transaction;
-import org.hibernate.classic.Session;
 import teste.domain.User;
 import teste.domain.UserSession;
 import teste.domain.dao.DaoFactory;
 import teste.utils.HibernateUtils;
-//import teste.servicepack.security.logic.Transaction;
-//import teste.servicepack.security.logic.injectSession;
+import teste.servicepack.security.logic.Transaction;
+import teste.servicepack.security.logic.AtributeSession;
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.List;
+
 public class ServicoLogin {
 
     User u = null;
 
-  //  @Transaction
-    //@injectSession
+    @Transaction
+    @AtributeSession
     public boolean checkLogin(String user,String pwd, UserSession session) throws ServletException, IOException {
 
         //TODO apanhar lista dos users todos
@@ -35,7 +34,7 @@ public class ServicoLogin {
 
     }
 
-   // @Transaction
+   @Transaction
     public String returnRole(){
         return u.getRoles();
     }

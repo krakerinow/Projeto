@@ -1,8 +1,8 @@
 package teste.servicos.section;
 
 import teste.domain.*;
-import org.hibernate.Transaction;
-import org.hibernate.classic.Session;
+//import org.hibernate.Transaction;
+//import org.hibernate.classic.Session;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,14 +10,20 @@ import teste.domain.Section;
 import teste.domain.SectionImpl;
 import teste.domain.dao.DaoFactory;
 import teste.utils.HibernateUtils;
+import teste.servicepack.security.logic.HasRole;
+import teste.servicepack.security.logic.Transaction;
+import teste.servicepack.security.logic.IsAuthenticated;
 
 public class ServicoSection {
 
+    @IsAuthenticated
+    @HasRole(role="admin")
+    @Transaction
     public JSONObject addSection(JSONObject section){
-        SectionImpl s = SectionImpl.fromJson(section);
 
-        Session sess = HibernateUtils.getCurrentSession();
-        Transaction t = sess.beginTransaction();
+        long idPage = section.getLong("idPage");
+        Page page = DaoFactory.createPageDao().load(idPage);
+        SectionImpl s = SectionImpl.fromJson(section);
 
         if(s.getId() > 0)
         {
@@ -33,13 +39,15 @@ public class ServicoSection {
         }
         else
         {
-            sess.save(s);
+            page.getSections().add(s);
+            HibernateUtils.getCurrentSession().save(s);
         }
-        t.commit();
 
         return new JSONObject(s.toJson());
     }
 
+    @IsAuthenticated
+    @Transaction
     public JSONArray returnAll(JSONObject dummy) throws JSONException
     {
         Page page = DaoFactory.createPageDao().load(dummy.getLong("id"));
@@ -56,6 +64,9 @@ public class ServicoSection {
         return resultados;
     }
 
+    @IsAuthenticated
+    @HasRole(role = "admin")
+    @Transaction
     public void deleteSection(JSONObject section) {
         Section s = (Section) HibernateUtils.getCurrentSession().load(Section.class, section.getLong("idSection"));
 

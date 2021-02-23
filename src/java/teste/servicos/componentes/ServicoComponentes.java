@@ -1,21 +1,24 @@
 package teste.servicos.componentes;
 
-import org.hibernate.Transaction;
-import org.hibernate.classic.Session;
 import org.json.JSONObject;
 import teste.domain.Components;
-import teste.domain.ComponentsImpl;
 import teste.domain.ComponentTextImpl;
+import teste.domain.Section;
 import teste.domain.dao.DaoFactory;
+import teste.servicepack.security.logic.HasRole;
+import teste.servicepack.security.logic.Transaction;
+import teste.servicepack.security.logic.IsAuthenticated;
 import teste.utils.HibernateUtils;
 
 public class ServicoComponentes {
 
+    @IsAuthenticated
+    @HasRole(role="admin")
+    @Transaction
     public JSONObject addComponentText(JSONObject component){
+        long idSection = component.getLong("idSection");
         ComponentTextImpl s = ComponentTextImpl.fromJson(component);
-
-        Session sess = HibernateUtils.getCurrentSession();
-        Transaction t = sess.beginTransaction();
+        Section section = DaoFactory.createSectionDao().load(idSection);
 
         if(s.getId() > 0)
         {
@@ -29,13 +32,16 @@ public class ServicoComponentes {
         }
         else
         {
-            sess.save(s);
+            section.getComponents().add(s);
+            HibernateUtils.getCurrentSession().save(s);
         }
-        t.commit();
 
         return new JSONObject(s.toJson());
     }
 
+    @IsAuthenticated
+    @HasRole(role="admin")
+    @Transaction
     public void deleteComponent(JSONObject component) {
         Components c = (Components) HibernateUtils.getCurrentSession().load(Components.class, component.getLong("idComponent"));
 
