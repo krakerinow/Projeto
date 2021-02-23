@@ -1,0 +1,11 @@
+<hibernate-mapping>
+<class name="pt.estgp.es.exemplos.hibernate.UserSession" table="user_session">
+<id name="id" type="long">
+<generator class="native"/>
+</id>
+<discriminator column="discriminator"/>
+<property name="cookie" type="string"/>
+<many-to-one name="user" class="pt.estgp.es.exemplos.hibernate.User" column="user_id" outer-join="true" cascade="none"/>
+<subclass name="pt.estgp.es.exemplos.hibernate.UserSessionImpl" discriminator-value="UserSessionImpl"/>
+</class>
+</hibernate-mapping>
