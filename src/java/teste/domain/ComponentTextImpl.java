@@ -4,7 +4,7 @@ import com.owlike.genson.Genson;
 import com.owlike.genson.GensonBuilder;
 import org.json.JSONObject;
 
-public class ComponentsImpl extends Components {
+public class ComponentTextImpl extends ComponentText {
 
 
     static Genson genson = new GensonBuilder()
@@ -14,12 +14,13 @@ public class ComponentsImpl extends Components {
             .useClassMetadata(true)
             .useRuntimeType(true)
             .include("id",Components.class)
+            .include("text",ComponentText.class)
             .create();
 
 
-    public static ComponentsImpl fromJson(JSONObject jsonObject)
+    public static ComponentTextImpl fromJson(JSONObject jsonObject)
     {
-        return genson.deserialize(jsonObject.toString(), ComponentsImpl.class);
+        return genson.deserialize(jsonObject.toString(), ComponentTextImpl.class);
     }
 
     public String toJson()
@@ -31,6 +32,7 @@ public class ComponentsImpl extends Components {
     public String toString() {
         return "Component{" +
                 "id=" + getId() +
+                "text=" + getText() +
                 '}';
     }
 

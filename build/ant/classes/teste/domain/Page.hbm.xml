@@ -4,7 +4,7 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="teste.domain.Section" table="Section" abstract="true">
+    <class name="teste.domain.Page" table="Page" abstract="true">
         <meta attribute="scope-class">public abstract</meta>
 
         <id name="id" type="long">
@@ -14,12 +14,15 @@
         <discriminator column="discriminator"/>
         <timestamp source="db" name="updateDate" unsaved-value="null"/>
         <property name="title" type="string"/>
-        <many-to-one name="page" class="teste.domain.Page" column="idPage" outer-join="true" cascade="none"/>
-        <set name="components" cascade="none">
-            <key column="idSection"/>
-            <one-to-many class="teste.domain.ComponentsImpl"/>
+        <property name="roles" type="string"/>
+        <many-to-one name="user" class="teste.domain.User" column="owner" outer-join="true" cascade="none"/>
+
+        <set name="sections" cascade="none">
+            <key column="idPage"/>
+            <one-to-many class="teste.domain.Section"/>
         </set>
-        <subclass name="teste.domain.SectionImpl" discriminator-value="SectinImpl"/>
+
+        <subclass name="teste.domain.PageImpl" discriminator-value="PageImpl"/>
     </class>
 
 </hibernate-mapping>
