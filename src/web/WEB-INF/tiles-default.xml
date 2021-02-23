@@ -26,17 +26,6 @@
     </definition>
 
 
-    <definition name="page.student" extends="base.definition">
-        <put name="title" value="Estudante"/>
-        <put name="body" value="/user/criarStudent.jsp"/>
-    </definition>
-
-    <definition name="page.uc" extends="base.definition">
-        <put name="title" value="UC"/>
-        <put name="body" value="/user/editStudent.jsp"/>
-    </definition>
-
-
 
 
 </tiles-definitions>

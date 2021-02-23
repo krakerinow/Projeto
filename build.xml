@@ -169,6 +169,7 @@
 
 		<copy file="conf/log4j.properties" todir="build/ant/classes"/>
 		<copy file="conf/hibernate.cfg.xml" todir="build/ant/classes/teste/domain"/>
+		<copy file="conf/plugins.properties" todir="build/ant/classes"/>
 
 		<copy todir="build/ant/classes">
 			<fileset dir="src/java">
@@ -188,6 +189,11 @@
 			<replacefilter token="@database.password@" value="${database.password}"/>
 			<replacefilter token="@database.connection.url@" value="${database.connection.url}"/>
 			<replacefilter token="@hibernate.show.sql@" value="${hibernate.show.sql}"/>
+		</replace>
+
+		<replace file="build/ant/classes/plugins.properties">
+			<replacefilter token="@teste.servicepack.pluginSession.RegisterSession@"
+						   value="${teste.servicepack.pluginSession.RegisterSession}"/>
 		</replace>
 	</target>
 

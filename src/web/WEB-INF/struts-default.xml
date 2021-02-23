@@ -31,27 +31,6 @@
         <action path="/login" forward="page.login"/>
 
 
-        <action path="/user/estudante" forward="page.student"/>
-
-        <action path="/user/uc" forward="page.uc"/>
-
-        <!--Authentication-->
-      <!--  <action path="/authenticate"
-                type="pt.estgp.estgweb.web.controllers.authenticate.AuthenticateController"
-                name="EmptyForm"
-                scope="request"
-                parameter="dispatch"
-                validate="false"
-                input="page.authentication">
-            <forward name="success" path="page.separators.home"/>
-            <forward name="logout" path="page.authentication"/>
-            <forward name="firstTimeAuthenticate" path="page.first.time.authenticate"/>
-        </action>-->
-
-
-
-
-
     </action-mappings>
     <!--20 Megabytes upload max size can go until 700 MB nao se sabe porque
         pontos possiveis de ajuste Fazer um UPLOAD Servlet

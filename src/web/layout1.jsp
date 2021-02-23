@@ -11,7 +11,6 @@
     </head>
     <body id="public">
 
-        <bean:message key="error.no.cookies"/>
         <!-- HEADER -->
         <tiles:insert attribute="header"/>
 

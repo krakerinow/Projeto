@@ -18,8 +18,6 @@ public class ServicoLogin {
     @AtributeSession
     public boolean Login(String user,String pwd, UserSession session) throws ServletException, IOException {
 
-        //TODO apanhar lista dos users todos
-
         List<User> users = DaoFactory.createUserDao().createCriteria().list();
 
         for (User value : users) {

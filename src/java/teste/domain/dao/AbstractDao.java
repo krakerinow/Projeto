@@ -6,6 +6,7 @@ import teste.utils.HibernateUtils;
 
 import java.io.Serializable;
 
+
 public abstract class AbstractDao<CLAZZ>
 {
 
