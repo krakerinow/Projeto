@@ -1,59 +1,94 @@
 package teste.servicepack.security.logic;
 
+import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import teste.servicepack.middlewareaspect2.ServiceAnnotationWithParam;
-import teste.servicepack.middlewareaspect2.ServiceAnnotationWithParam2;
+import teste.domain.UserSession;
 import teste.servicepack.security.SecurityContextProvider;
+import teste.servicepack.security.SecuritySessionContext;
+import teste.utils.HibernateUtils;
 
-/**
- * Created by jorgemachado on 18/10/18.
- */
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @Aspect
-public class SecurityAspects
-{
+public class SecurityAspects {
+    private static final Logger logger = Logger.getLogger(SecurityAspects.class);
+
+    @Pointcut("@annotation(Transaction)")
+    public void serviceTransactionPointCut() {}
+
+    @Pointcut("@annotation(AtributeSession)")
+    public void AtributeSessionPointCut() {}
+
+    @Pointcut("@annotation(HasRole)")
+    public void HasRolePointCut(HasRole HasRole) {}
+
     @Pointcut("@annotation(IsAuthenticated)")
-    public void isAuthenticatedPointCut(){}
+    public void IsAuthenticatedPointCut() {}
 
-    @Pointcut("@annotation(hasRole)")
-    public void hasRolePointCut(HasRole hasRole){}
-
-    @Pointcut("@annotation(printParameterExample)")
-    public void printParameterExamplePointCut(PrintParameterExample printParameterExample){}
+    @Pointcut("@annotation(pageCreator)")
+    public void pageCreator() {}
 
     @Pointcut("execution(* *(..))")
-    public void executionPointCut(){}
+    public void executionPointCut() {}
 
+    @Around("serviceTransactionPointCut() && executionPointCut()")
+    public Object aroundService(ProceedingJoinPoint pjp) throws Throwable {
+        // Executa antes
+        HibernateUtils.getCurrentSession().beginTransaction();
+        try {
+            // Executa depois
+            Object returnObj = pjp.proceed();
+            HibernateUtils.getCurrentSession().getTransaction().commit();
+            return returnObj;
+        } catch(Exception e) {
+            HibernateUtils.getCurrentSession().getTransaction().rollback();
+            throw e;
+        }
+    }
 
-    @Around("isAuthenticatedPointCut() && executionPointCut()")
-    public Object isAuthenticatedAdvise(ProceedingJoinPoint pjp) throws Throwable
+    @Around("AtributeSessionPointCut() && executionPointCut()")
+    public Object AtributeSessionAdvise(ProceedingJoinPoint pjp) throws Throwable {
+        SecuritySessionContext securitySessionContext = SecurityContextProvider.getInstance().getSecuritySessionContext();
+        UserSession session = (UserSession) HibernateUtils.getCurrentSession().load(UserSession.class, securitySessionContext.getRequester());
+        final Object[] args = pjp.getArgs();
+        List<Object> objectList = new ArrayList<>(Arrays.asList(args));
+
+        objectList.add(args.length - 1, session);
+        return pjp.proceed(objectList.toArray());
+    }
+
+    @Around("IsAuthenticatedPointCut() && executionPointCut()")
+    public Object IsAuthenticatedAdvise(ProceedingJoinPoint pjp) throws Throwable
     {
+        logger.info("Is Authenticated Aspect");
         String cookie = SecurityContextProvider.getInstance().getSecuritySessionContext().getRequester();
+        UserSession session = (UserSession) HibernateUtils.getCurrentSession().load(UserSession.class,cookie);
 
-        //Com o cookie ir buscar a sessao e seguidamente o User e ver se esta logado
-        if(true)
+        if(session.getUser() != null)
             return pjp.proceed();
-        throw new NotAuthenticatedException("Access Denied, not authenticated at " + pjp.getSourceLocation().getFileName() + " " + pjp.getSourceLocation().getLine() + " service: " + pjp.getSignature().getName());
+
+        throw new NotAuthenticatedException();
     }
 
-    @Around("hasRolePointCut(hasRole) && executionPointCut()")
-    public Object hasRoleAdvise(ProceedingJoinPoint pjp,HasRole hasRole) throws Throwable
-    {
-        //String username = SecurityContextProvider.getInstance().getSecuritySessionContext().getUsername();
+    @Around("HasRolePointCut(hasRole) && executionPointCut()")
+    public Object HasRoleAdvise(ProceedingJoinPoint pjp, HasRole hasRole) throws Throwable {
+        logger.info("Has Role Aspect");
         String cookie = SecurityContextProvider.getInstance().getSecuritySessionContext().getRequester();
-        //verificar se o username é um user com o role que está em hasRole.role()
-        boolean pass = false;
-        if(pass)
-           return pjp.proceed();
-        throw new FailRoleException("Access Denied, does not have role " + hasRole.role() + " at " + pjp.getSourceLocation().getFileName() + " " + pjp.getSourceLocation().getLine() + " service: " + pjp.getSignature().getName());
-    }
+        UserSession session = (UserSession) HibernateUtils.getCurrentSession().load(UserSession.class,cookie);
 
-    @Around("printParameterExamplePointCut(printParameterExample) && executionPointCut()")
-    public Object printParameterExampleAdvise(ProceedingJoinPoint pjp,PrintParameterExample printParameterExample) throws Throwable
-    {
-        System.out.println("PARAMETRO: " + JointPointUtils.getParameter(pjp,printParameterExample.paramName()));
-        return pjp.proceed();
+        String[] rolesIn = hasRole.role().split(",");
+        String[] roles = session.getUser().getRoles().split(",");
+        for(String checkRole: rolesIn) {
+            if(Arrays.asList(roles).contains(checkRole)) {
+                return pjp.proceed();
+            }
+        }
+
+        throw new FailRoleException();
     }
 }
