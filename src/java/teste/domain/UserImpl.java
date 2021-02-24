@@ -39,7 +39,6 @@ public class UserImpl extends User {
                 ", nome='" + getNome() + '\'' +
                 ", username='" + getUsername() + '\'' +
                 ", email='" + getEmail() + '\'' +
-                ", password='" + getPassword() + '\'' +
                 ", roles='" + getRoles() + '\'' +
                 '}';
     }

@@ -14,6 +14,7 @@ public class UserSessionImpl extends UserSession {
             .include("id",UserSession.class)
             .include("cookie",UserSession.class)
             .include("user",User.class)
+            .include("user",UserSession.class)
             .create();
 
     public static UserSessionImpl fromJson(JSONObject jsonObject)
@@ -28,9 +29,10 @@ public class UserSessionImpl extends UserSession {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserSession{" +
                 "id=" + getId() +
                 ", cookie='" + getCookie() + '\'' +
+                ", user='" + getUser() + '\'' +
                 '}';
     }
 }
