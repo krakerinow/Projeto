@@ -32,6 +32,7 @@ public class ServicoLogin {
 
     }
 
+    @Transaction
     public String returnRole(){
         return u.getRoles();
     }

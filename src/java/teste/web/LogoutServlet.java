@@ -9,24 +9,20 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class LogoutServlet extends AbstractServlet {
-
     @Override
-    protected void doService(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String user = null;
         Cookie[] cookies = req.getCookies();
-
         if (cookies != null) {
-            for (Cookie c : cookies) {
-                if (c.getName().equals("user")) {
-                    user = c.getValue();
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("user")) {
+                    user = cookie.getValue();
                     break;
                 }
             }
         }
-
-        ServicoLogout sLogout = new ServicoLogout();
-        if (sLogout.logout(user, null)) {
+        ServicoLogout servLogout = new ServicoLogout();
+        if (servLogout.logout(user, null)) {
             Cookie loginCookie = null;
             Cookie[] cookies1 = req.getCookies();
             if (cookies1 != null) {
@@ -41,7 +37,6 @@ public class LogoutServlet extends AbstractServlet {
                 loginCookie.setMaxAge(0);
                 resp.addCookie(loginCookie);
             }
-
             //invalidate the session if exists
             HttpSession session = req.getSession(false);
             System.out.println("User=" + session.getAttribute("user"));
@@ -49,11 +44,10 @@ public class LogoutServlet extends AbstractServlet {
             String encodedURL = resp.encodeRedirectURL("http://localhost:8080/es/login.do");
             resp.sendRedirect(encodedURL);
         }
+    }
 
-
-
-
-
+    @Override
+    protected void doService(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
     }
 }

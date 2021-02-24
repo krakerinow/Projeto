@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class SecurityFilter implements Filter {
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -16,8 +17,6 @@ public class SecurityFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        //response.sendError(403);
-
         openSession(servletRequest, filterChain, response);
     }
 
@@ -40,4 +39,5 @@ public class SecurityFilter implements Filter {
     public void destroy() {
 
     }
+
 }

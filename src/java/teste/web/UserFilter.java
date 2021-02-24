@@ -34,7 +34,7 @@ public class UserFilter implements javax.servlet.Filter {
             request.getRequestDispatcher("/login.jsp").forward(request,response);
         }
         else {
-            logger.debug("Passagem Permitida ao artista: " + ((HttpServletRequest) req).getSession().getAttribute("user"));
+            logger.debug("Utilizador permitido: " + ((HttpServletRequest) req).getSession().getAttribute("user"));
             chain.doFilter(req, resp);
         }
     }
@@ -43,6 +43,5 @@ public class UserFilter implements javax.servlet.Filter {
     public void destroy() {
 
     }
-
 
 }
