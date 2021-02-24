@@ -10,7 +10,7 @@ import teste.domain.User;
 import teste.domain.dao.DaoFactory;
 import teste.servicepack.security.logic.HasRole;
 import teste.servicepack.security.logic.Transaction;
-import teste.servicepack.security.logic.IsAuthenticated;
+import teste.servicepack.security.logic.isAuthenticated;
 
 import teste.utils.HibernateUtils;
 
@@ -19,7 +19,7 @@ import java.util.List;
 public class ServicoUser {
 
     @Transaction
-    @IsAuthenticated
+    @isAuthenticated
     @HasRole(role="admin")
     public JSONObject addUser(JSONObject user){
         UserImpl s = UserImpl.fromJson(user);
@@ -47,7 +47,23 @@ public class ServicoUser {
         return new JSONObject(s.toJson());
     }
 
-    @IsAuthenticated
+    @Transaction
+    @isAuthenticated
+    @HasRole(role="admin")
+    public JSONObject loadUser(JSONObject idObj)
+    {
+
+        Long id = idObj.getLong("id");
+
+        UserImpl userPersistente = (UserImpl)DaoFactory.createUserDao().get(id);
+
+        JSONObject jsonObject = new JSONObject(userPersistente.toJson());
+
+        return jsonObject;
+
+    }
+
+    @isAuthenticated
     @Transaction
     public JSONArray loadAll(JSONObject dummy)
     {
@@ -72,7 +88,7 @@ public class ServicoUser {
     }
 
     @Transaction
-    @IsAuthenticated
+    @isAuthenticated
     @HasRole(role="admin")
     public void deleteUser(JSONObject user) {
         User u = (User) HibernateUtils.getCurrentSession().load(User.class, user.getLong("UserID"));

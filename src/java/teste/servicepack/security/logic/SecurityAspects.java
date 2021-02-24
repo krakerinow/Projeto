@@ -5,11 +5,10 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import teste.domain.UserSession;
 import teste.servicepack.security.SecurityContextProvider;
 import teste.servicepack.security.SecuritySessionContext;
 import teste.utils.HibernateUtils;
-
+import teste.domain.UserSession;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,17 +20,17 @@ public class SecurityAspects {
     @Pointcut("@annotation(Transaction)")
     public void serviceTransactionPointCut() {}
 
-    @Pointcut("@annotation(AtributeSession)")
-    public void AtributeSessionPointCut() {}
+    @Pointcut("@annotation(injectSession)")
+    public void injectSessionPointCut() {}
 
-    @Pointcut("@annotation(HasRole)")
-    public void HasRolePointCut(HasRole HasRole) {}
+    @Pointcut("@annotation(hasRole)")
+    public void hasRolePointCut(HasRole hasRole) {}
 
-    @Pointcut("@annotation(IsAuthenticated)")
-    public void IsAuthenticatedPointCut() {}
+    @Pointcut("@annotation(isAuthenticated)")
+    public void isAuthenticatedPointCut() {}
 
-    @Pointcut("@annotation(pageCreator)")
-    public void pageCreator() {}
+    @Pointcut("@annotation(CriadorPagina)")
+    public void criadorPaginaPointcut() {}
 
     @Pointcut("execution(* *(..))")
     public void executionPointCut() {}
@@ -51,8 +50,8 @@ public class SecurityAspects {
         }
     }
 
-    @Around("AtributeSessionPointCut() && executionPointCut()")
-    public Object AtributeSessionAdvise(ProceedingJoinPoint pjp) throws Throwable {
+    @Around("injectSessionPointCut() && executionPointCut()")
+    public Object injectSessionAdvise(ProceedingJoinPoint pjp) throws Throwable {
         SecuritySessionContext securitySessionContext = SecurityContextProvider.getInstance().getSecuritySessionContext();
         UserSession session = (UserSession) HibernateUtils.getCurrentSession().load(UserSession.class, securitySessionContext.getRequester());
         final Object[] args = pjp.getArgs();
@@ -62,8 +61,8 @@ public class SecurityAspects {
         return pjp.proceed(objectList.toArray());
     }
 
-    @Around("IsAuthenticatedPointCut() && executionPointCut()")
-    public Object IsAuthenticatedAdvise(ProceedingJoinPoint pjp) throws Throwable
+    @Around("isAuthenticatedPointCut() && executionPointCut()")
+    public Object isAuthenticatedAdvise(ProceedingJoinPoint pjp) throws Throwable
     {
         logger.info("Is Authenticated Aspect");
         String cookie = SecurityContextProvider.getInstance().getSecuritySessionContext().getRequester();
@@ -75,8 +74,8 @@ public class SecurityAspects {
         throw new NotAuthenticatedException();
     }
 
-    @Around("HasRolePointCut(hasRole) && executionPointCut()")
-    public Object HasRoleAdvise(ProceedingJoinPoint pjp, HasRole hasRole) throws Throwable {
+    @Around("hasRolePointCut(hasRole) && executionPointCut()")
+    public Object hasRoleAdvise(ProceedingJoinPoint pjp, HasRole hasRole) throws Throwable {
         logger.info("Has Role Aspect");
         String cookie = SecurityContextProvider.getInstance().getSecuritySessionContext().getRequester();
         UserSession session = (UserSession) HibernateUtils.getCurrentSession().load(UserSession.class,cookie);
@@ -91,4 +90,5 @@ public class SecurityAspects {
 
         throw new FailRoleException();
     }
+
 }

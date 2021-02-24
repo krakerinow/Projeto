@@ -3,16 +3,16 @@ package teste.servicos.Logout;
 import teste.domain.UserSession;
 import teste.domain.dao.DaoFactory;
 //import teste.servicepack.security.logic.*;
-import teste.servicepack.security.logic.AtributeSession;
+import teste.servicepack.security.logic.injectSession;
 import teste.servicepack.security.logic.Transaction;
-import teste.servicepack.security.logic.IsAuthenticated;
+import teste.servicepack.security.logic.isAuthenticated;
 import java.util.List;
 
 public class ServicoLogout {
 
-    @IsAuthenticated
+    @isAuthenticated
     @Transaction
-    @AtributeSession
+    @injectSession
     public boolean logout(String user, UserSession session) {
 
         List<UserSession> users = DaoFactory.createUserSessionDao().createCriteria().list();

@@ -18,11 +18,13 @@
     <definition name="page.home" extends="base.definition">
         <put name="title" value="Bem vindos"/>
         <put name="body" value="home.jsp"/>
+        <put name="footer" value="null.jsp"/>
     </definition>
 
     <definition name="page.login" extends="base.definition">
         <put name="title" value="Autenticação"/>
         <put name="body" value="login.jsp"/>
+        <put name="footer" value="null.jsp"/>
     </definition>
 
 

@@ -12,11 +12,11 @@ import teste.domain.dao.DaoFactory;
 import teste.utils.HibernateUtils;
 import teste.servicepack.security.logic.HasRole;
 import teste.servicepack.security.logic.Transaction;
-import teste.servicepack.security.logic.IsAuthenticated;
+import teste.servicepack.security.logic.isAuthenticated;
 
 public class ServicoSection {
 
-    @IsAuthenticated
+    @isAuthenticated
     @HasRole(role="admin")
     @Transaction
     public JSONObject addSection(JSONObject section){
@@ -46,7 +46,7 @@ public class ServicoSection {
         return new JSONObject(s.toJson());
     }
 
-    @IsAuthenticated
+    @isAuthenticated
     @Transaction
     public JSONArray returnAll(JSONObject dummy) throws JSONException
     {
@@ -64,7 +64,7 @@ public class ServicoSection {
         return resultados;
     }
 
-    @IsAuthenticated
+    @isAuthenticated
     @HasRole(role = "admin")
     @Transaction
     public void deleteSection(JSONObject section) {

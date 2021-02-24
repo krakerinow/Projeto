@@ -5,7 +5,7 @@ import teste.domain.UserSession;
 import teste.domain.dao.DaoFactory;
 import teste.utils.HibernateUtils;
 import teste.servicepack.security.logic.Transaction;
-import teste.servicepack.security.logic.AtributeSession;
+import teste.servicepack.security.logic.injectSession;
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.List;
@@ -15,7 +15,7 @@ public class ServicoLogin {
     User u = null;
 
     @Transaction
-    @AtributeSession
+    @injectSession
     public boolean Login(String user,String pwd, UserSession session) throws ServletException, IOException {
 
         List<User> users = DaoFactory.createUserDao().createCriteria().list();
@@ -32,7 +32,6 @@ public class ServicoLogin {
 
     }
 
-   @Transaction
     public String returnRole(){
         return u.getRoles();
     }

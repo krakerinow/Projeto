@@ -1,8 +1,5 @@
 package teste.servicepack.security.logic;
 
-/**
- * Created by jorgemachado on 23/10/18.
- */
 public class FailRoleException extends AccessDeniedException
 {
 

@@ -11,11 +11,11 @@ import teste.servicepack.security.SecurityContextProvider;
 import teste.utils.HibernateUtils;
 import teste.servicepack.security.logic.HasRole;
 import teste.servicepack.security.logic.Transaction;
-import teste.servicepack.security.logic.IsAuthenticated;
+import teste.servicepack.security.logic.isAuthenticated;
 import java.util.List;
 
 public class ServicoPage {
-    @IsAuthenticated
+    @isAuthenticated
     @HasRole(role="admin")
     @Transaction
     public JSONObject addPage(JSONObject page){
@@ -47,7 +47,7 @@ public class ServicoPage {
 
 
     }
-    @IsAuthenticated
+    @isAuthenticated
     @Transaction
     public JSONObject loadPage(JSONObject page) {
         Long sId = page.getLong("id");
@@ -58,7 +58,7 @@ public class ServicoPage {
         return jsonObject;
     }
 
-    @IsAuthenticated
+    @isAuthenticated
     @Transaction
     public JSONArray loadAll(JSONObject dummy) {
         List<Page> pages = DaoFactory.createPageDao().createCriteria().list();
@@ -71,7 +71,7 @@ public class ServicoPage {
         return results;
     }
 
-    @IsAuthenticated
+    @isAuthenticated
     @HasRole(role="admin")
     @Transaction
     public void deletePage(JSONObject page) {

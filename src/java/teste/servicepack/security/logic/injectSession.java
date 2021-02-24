@@ -1,4 +1,4 @@
 package teste.servicepack.security.logic;
 
-public @interface AtributeSession {
+public @interface injectSession {
 }

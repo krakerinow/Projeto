@@ -7,12 +7,12 @@ import teste.domain.Section;
 import teste.domain.dao.DaoFactory;
 import teste.servicepack.security.logic.HasRole;
 import teste.servicepack.security.logic.Transaction;
-import teste.servicepack.security.logic.IsAuthenticated;
+import teste.servicepack.security.logic.isAuthenticated;
 import teste.utils.HibernateUtils;
 
 public class ServicoComponentes {
 
-    @IsAuthenticated
+    @isAuthenticated
     @HasRole(role="admin")
     @Transaction
     public JSONObject addComponentText(JSONObject component){
@@ -39,7 +39,7 @@ public class ServicoComponentes {
         return new JSONObject(s.toJson());
     }
 
-    @IsAuthenticated
+    @isAuthenticated
     @HasRole(role="admin")
     @Transaction
     public void deleteComponent(JSONObject component) {

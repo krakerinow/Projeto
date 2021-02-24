@@ -1,11 +1,6 @@
 package teste.servicepack.security.logic;
 
-/**
- * Created by jorgemachado on 23/10/18.
- */
-public class AccessDeniedException extends Throwable
-{
-
+public class AccessDeniedException extends Throwable {
     public AccessDeniedException() {
         super();
     }
@@ -24,5 +19,9 @@ public class AccessDeniedException extends Throwable
 
     public AccessDeniedException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
+    }
+
+    public String toString(){
+        return "Access denied, please exit.";
     }
 }

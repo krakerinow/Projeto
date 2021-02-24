@@ -1,7 +1,5 @@
 package teste.servicepack.security;
 
-import java.util.Date;
-
 /**
  * Created by jorgemachado on 23/10/18.
  */
