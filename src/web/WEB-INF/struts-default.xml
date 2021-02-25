@@ -11,6 +11,7 @@
         <!--Portal Forward-->
         <action path="/home" forward="page.home"/>
         <action path="/login" forward="page.login"/>
+        <action path="/createuser" forward="page.user"/>
 
     </action-mappings>
 

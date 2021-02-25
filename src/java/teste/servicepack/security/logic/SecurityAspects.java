@@ -5,6 +5,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.hibernate.classic.Session;
+import org.hibernate.Transaction;
 import teste.servicepack.security.SecurityContextProvider;
 import teste.servicepack.security.SecuritySessionContext;
 import teste.utils.HibernateUtils;
@@ -18,7 +20,7 @@ public class SecurityAspects {
     private static final Logger logger = Logger.getLogger(SecurityAspects.class);
 
     @Pointcut("@annotation(Transaction)")
-    public void serviceTransactionPointCut() {}
+    public void TransactionPointCut() {}
 
     @Pointcut("@annotation(injectSession)")
     public void injectSessionPointCut() {}
@@ -29,30 +31,28 @@ public class SecurityAspects {
     @Pointcut("@annotation(isAuthenticated)")
     public void isAuthenticatedPointCut() {}
 
-    @Pointcut("@annotation(CriadorPagina)")
-    public void criadorPaginaPointcut() {}
-
     @Pointcut("execution(* *(..))")
     public void executionPointCut() {}
 
-    @Around("serviceTransactionPointCut() && executionPointCut()")
-    public Object aroundService(ProceedingJoinPoint pjp) throws Throwable {
-        // Executa antes
-        HibernateUtils.getCurrentSession().beginTransaction();
-        logger.info("Iniciando chamada do servico:" + pjp.getSignature().getName() +
-                " na classe " + pjp.getSourceLocation().getClass().getName());
-        try {
-            // Executa depois
+    @Around("TransactionPointCut()")
+    public Object TransactionAdvise(ProceedingJoinPoint pjp) throws Throwable {
+        Session sess = HibernateUtils.getCurrentSession();
+        Transaction t = sess.beginTransaction();
+        t.begin();
+        try{
             Object returnObj = pjp.proceed();
-            HibernateUtils.getCurrentSession().getTransaction().commit();
+            if(!t.wasCommitted()){
+                t.commit();
+            }
             return returnObj;
-        } catch(Exception e) {
-            HibernateUtils.getCurrentSession().getTransaction().rollback();
-            throw e;
+        }catch (Exception e){
+            t.rollback();
+            System.err.println(e);
         }
+        return 0;
     }
 
-    @Around("injectSessionPointCut() && executionPointCut()")
+    @Around("injectSessionPointCut()")
     public Object injectSessionAdvise(ProceedingJoinPoint pjp) throws Throwable {
         SecuritySessionContext securitySessionContext = SecurityContextProvider.getInstance().getSecuritySessionContext();
         UserSession session = (UserSession) HibernateUtils.getCurrentSession().load(UserSession.class, securitySessionContext.getRequester());

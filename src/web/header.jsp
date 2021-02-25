@@ -48,6 +48,7 @@
 <ul>
     <li><a href="home.do">Home</a></li>
     <li><a href="login.do">Login</a></li>
+    <li><a href="createuser.do">Users</a></li>
 </ul>
 
 </body>

@@ -27,4 +27,13 @@
         <put name="footer" value="null.jsp"/>
     </definition>
 
+
+    <definition name="page.user" extends="base.definition">
+        <put name="title" value="Autenticação"/>
+        <put name="body" value="users.jsp"/>
+        <put name="footer" value="null.jsp"/>
+    </definition>
+
+
+
 </tiles-definitions>

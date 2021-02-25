@@ -11,7 +11,6 @@ public class UserSessionImpl extends UserSession {
             .exclude(Object.class)
             .useClassMetadata(true)
             .useRuntimeType(true)
-            .include("id",UserSession.class)
             .include("cookie",UserSession.class)
             .include("user",User.class)
             .include("user",UserSession.class)

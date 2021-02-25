@@ -4,6 +4,14 @@
 	<property file="local.properties"/>
 	<property file="build.properties"/>
 
+	<!-- Special task to run AspectJ compiler -->
+	<taskdef
+			resource="org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties">
+		<classpath>
+			<pathelement location="lib/aspectj/aspectjtools.jar"/>
+		</classpath>
+	</taskdef>
+
 	<path id="pathref">
 
 		<fileset dir="lib/hibernate">
@@ -30,8 +38,6 @@
 		<fileset dir="${TOMCAT_HOME}/lib">
 			<include name="servlet-api.jar"/>
 		</fileset>
-
-
 	</path>
 
 	<taskdef name="hibernatetool"

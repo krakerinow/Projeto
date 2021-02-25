@@ -1,10 +1,10 @@
 package teste.domain.dao;
 
-import org.apache.log4j.Logger;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import teste.utils.HibernateUtils;
-import teste.web.LoginServlet;
+
 
 import java.io.Serializable;
 

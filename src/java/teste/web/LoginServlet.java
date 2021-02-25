@@ -2,12 +2,6 @@ package teste.web;
 
 import org.apache.log4j.Logger;
 import teste.servicos.login.ServicoLogin;
-import org.hibernate.Transaction;
-import org.hibernate.classic.Session;
-import teste.domain.User;
-import teste.domain.UserImpl;
-import teste.utils.HibernateUtils;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -28,11 +22,11 @@ public class LoginServlet extends AbstractServlet
         logger.debug("Pedido do user com a pass: " + pass);
 
         if(servLogin.Login(user, pass,null)){
-
+            logger.info("123123131313131321");
             String roles = servLogin.returnRole();
             if(roles != null){
                 HttpSession session = req.getSession();
-                session.setAttribute("user", user);
+                session.setAttribute("username", user);
                 session.setAttribute("roles", roles);
                 Cookie userName = new Cookie("user", user);
                 resp.addCookie(userName);
@@ -41,7 +35,7 @@ public class LoginServlet extends AbstractServlet
             }
             else{
                 HttpSession session = req.getSession();
-                session.setAttribute("user", user);
+                session.setAttribute("username", user);
                 session.setAttribute("roles", "unassigned");
                 Cookie userName = new Cookie("user", user);
                 resp.addCookie(userName);
