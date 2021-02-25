@@ -19,6 +19,7 @@ public class UserImpl extends User {
             .include("email",User.class)
             .include("password",User.class)
             .include("roles",User.class)
+            .include("cookie",User.class)
             .create();
 
 
@@ -34,10 +35,11 @@ public class UserImpl extends User {
 
     @Override
     public String toString() {
-        return "UserSession{" +
+        return "User{" +
                 "id=" + getId() +
                 ", nome='" + getNome() + '\'' +
                 ", username='" + getUsername() + '\'' +
+                ", password='" + getPassword() + '\'' +
                 ", email='" + getEmail() + '\'' +
                 ", roles='" + getRoles() + '\'' +
                 '}';

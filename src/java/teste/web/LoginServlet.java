@@ -30,7 +30,7 @@ public class LoginServlet extends AbstractServlet
                 session.setAttribute("roles", roles);
                 Cookie userName = new Cookie("user", user);
                 resp.addCookie(userName);
-                String encodedURL = resp.encodeRedirectURL("home.do");
+                String encodedURL = resp.encodeRedirectURL("logged.do");
                 resp.sendRedirect(encodedURL);
             }
             else{
@@ -39,7 +39,7 @@ public class LoginServlet extends AbstractServlet
                 session.setAttribute("roles", "unassigned");
                 Cookie userName = new Cookie("user", user);
                 resp.addCookie(userName);
-                String encodedURL = resp.encodeRedirectURL("home.do");
+                String encodedURL = resp.encodeRedirectURL("logged.do");
                 resp.sendRedirect(encodedURL);
             }
         }else{

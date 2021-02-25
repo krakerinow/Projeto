@@ -12,8 +12,8 @@ public class UserSessionImpl extends UserSession {
             .useClassMetadata(true)
             .useRuntimeType(true)
             .include("cookie",UserSession.class)
-            .include("user",User.class)
             .include("user",UserSession.class)
+            .include("user",User.class)
             .create();
 
     public static UserSessionImpl fromJson(JSONObject jsonObject)
@@ -29,8 +29,7 @@ public class UserSessionImpl extends UserSession {
     @Override
     public String toString() {
         return "UserSession{" +
-                "id=" + getId() +
-                ", cookie='" + getCookie() + '\'' +
+                "cookie=" + getCookie() +
                 ", user='" + getUser() + '\'' +
                 '}';
     }
