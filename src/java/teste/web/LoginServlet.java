@@ -22,14 +22,15 @@ public class LoginServlet extends AbstractServlet
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String user = req.getParameter("username");
-        String pass = req.getParameter("password");
+        String pass = req.getParameter("pwd");
         ServicoLogin servLogin = new ServicoLogin();
         logger.info("User pede login: " + user);
         logger.debug("Pedido do user com a pass: " + pass);
 
         if(servLogin.Login(user, pass,null)){
+
             String roles = servLogin.returnRole();
-            if(roles!=null){
+            if(roles != null){
                 HttpSession session = req.getSession();
                 session.setAttribute("user", user);
                 session.setAttribute("roles", roles);
@@ -48,7 +49,7 @@ public class LoginServlet extends AbstractServlet
                 resp.sendRedirect(encodedURL);
             }
         }else{
-            String encodedURL = resp.encodeRedirectURL("http://localhost:8080/projES/login.do?wrong_password");
+            String encodedURL = resp.encodeRedirectURL("http://localhost:8080/es/home.do");
             resp.sendRedirect(encodedURL);
         }
     }

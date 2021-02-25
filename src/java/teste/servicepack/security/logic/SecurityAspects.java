@@ -39,6 +39,8 @@ public class SecurityAspects {
     public Object aroundService(ProceedingJoinPoint pjp) throws Throwable {
         // Executa antes
         HibernateUtils.getCurrentSession().beginTransaction();
+        logger.info("Iniciando chamada do servico:" + pjp.getSignature().getName() +
+                " na classe " + pjp.getSourceLocation().getClass().getName());
         try {
             // Executa depois
             Object returnObj = pjp.proceed();

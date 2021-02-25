@@ -13,9 +13,24 @@
         <url-pattern>/admin/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>SecurityFilter</filter-name>
+        <filter-class>teste.web.SecurityFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>SecurityFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>teste.web.LoginServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>teste.web.LogoutServlet</servlet-class>
     </servlet>
 
     <servlet>
@@ -58,9 +73,19 @@
     </servlet-mapping>
 
     <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
         <servlet-name>Rest</servlet-name>
         <url-pattern>/soa</url-pattern>
     </servlet-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/errors/erro404.jsp</location>
+    </error-page>
 
 
     <!--START FILES-->

@@ -27,7 +27,4 @@
         <put name="footer" value="null.jsp"/>
     </definition>
 
-
-
-
 </tiles-definitions>

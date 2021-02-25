@@ -1,16 +1,20 @@
 package teste.servicos.login;
 
+import org.apache.log4j.Logger;
 import teste.domain.User;
 import teste.domain.UserSession;
 import teste.domain.dao.DaoFactory;
 import teste.utils.HibernateUtils;
 import teste.servicepack.security.logic.Transaction;
 import teste.servicepack.security.logic.injectSession;
+import teste.web.LoginServlet;
+
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.List;
 
 public class ServicoLogin {
+
 
     User u = null;
 

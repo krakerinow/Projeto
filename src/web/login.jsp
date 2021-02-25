@@ -52,7 +52,7 @@
                     <p class="login">Login</p>
                     <div class="form-group">
                         <span class="glyphicon glyphicon-user"/>
-                        <input type="text" class="form-control" id="user" placeholder="Enter username"  name="user">
+                        <input type="text" class="form-control" id="username" placeholder="Enter username"  name="username">
                     </div>
                     <div class="form-group">
                         <span class="glyphicon glyphicon-lock"/>

@@ -1,11 +1,12 @@
 package teste.domain.dao;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import teste.utils.HibernateUtils;
+import teste.web.LoginServlet;
 
 import java.io.Serializable;
-
 
 public abstract class AbstractDao<CLAZZ>
 {
@@ -46,12 +47,9 @@ public abstract class AbstractDao<CLAZZ>
     {
         HibernateUtils.getCurrentSession().update(c);
     }
-
     public void delete(CLAZZ c)
     {
-        HibernateUtils.getCurrentSession().update(c);
+        HibernateUtils.getCurrentSession().delete(c);
     }
-
-
 
 }
