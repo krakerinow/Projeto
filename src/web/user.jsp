@@ -71,10 +71,7 @@
                                 <input type="text" ng-model="u.roles">
                             </td>
                             <td>
-                                <button ng-click="adicionarUser()"><span class="btn btn-success" ></span></button>
-                            </td>
-                            <td>
-                                <button ng-click="SaveUser(u)"><span class="glyphicon glyphicon-disk"></span></button>
+                                <button ng-click="SaveUser(u)"><span class="btn btn-success" ></span></button>
                             </td>
                         </tr>
                     </tbody>

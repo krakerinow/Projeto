@@ -67,6 +67,8 @@
         <li><a href="user.do">Users</a></li>-->
 
         <li>  <a id="home" class="navbar-item" href="<%=request.getContextPath()%>/home.do">Home</a></li>
+        <li>  <a id="pages" class="navbar-item" href="<%=request.getContextPath()%>/page.do">Pages</a></li>
+        <li>  <a id="users" class="navbar-item" href="<%=request.getContextPath()%>/user.do">Users</a></li>
         <li> <a id="login" class="navbar-item" style="display: none;" href="<%=request.getContextPath()%>/login.do">Login</a></li>
         <li> <a id="logout" class="navbar-item" style="display: none;" onclick="document.getElementById('logoutForm').submit();">Logout</a></li>
     </ul>
@@ -82,10 +84,14 @@
             $("#login").css("display", "none");
             $("#logout").css("display", "");
             $("#home").css("display", "");
+            $("#pages").css("display", "");
+            $("#users").css("display", "");
         } else {
             $("#logout").css("display", "none");
             $("#home").css("display", "none");
             $("#login").css("display", "");
+            $("#pages").css("display", "none");
+            $("#users").css("display", "none");
         }
     })
 </script>

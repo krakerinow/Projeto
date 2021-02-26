@@ -12,6 +12,8 @@
         <action path="/home" forward="page.home"/>
         <action path="/login" forward="page.login"/>
         <action path="/user" forward="page.user"/>
+        <action path="/page" forward="page.page"/>
+        <action path="/editPage" forward="page.editPage"/>
 
     </action-mappings>
 

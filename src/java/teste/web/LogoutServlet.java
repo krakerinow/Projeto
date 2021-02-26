@@ -1,5 +1,6 @@
 package teste.web;
 
+import org.apache.log4j.Logger;
 import teste.servicos.Logout.ServicoLogout;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -9,8 +10,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class LogoutServlet extends AbstractServlet {
+    private static final Logger logger = Logger.getLogger(LogoutServlet.class);
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        logger.info("LOGOUT");
         String user = null;
         Cookie[] cookies = req.getCookies();
         if (cookies != null) {

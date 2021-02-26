@@ -34,6 +34,19 @@
         <put name="footer" value="null.jsp"/>
     </definition>
 
+    <definition name="page.page" extends="base.definition">
+        <put name="title" value="Paginas"/>
+        <put name="body" value="page.jsp"/>
+        <put name="footer" value="null.jsp"/>
+    </definition>
+
+    <definition name="page.editPage" extends="base.definition">
+        <put name="title" value="Editar"/>
+        <put name="body" value="editPage.jsp"/>
+        <put name="footer" value="null.jsp"/>
+    </definition>
+
+
 
 
 </tiles-definitions>
