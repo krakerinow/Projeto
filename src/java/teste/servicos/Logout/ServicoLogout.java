@@ -17,7 +17,7 @@ public class ServicoLogout {
     @injectSession
     public boolean logout(String user, UserSession session) {
 
-        logger.info(user);
+
         List<UserSession> users = DaoFactory.createUserSessionDao().createCriteria().list();
 
         for (UserSession value : users) {

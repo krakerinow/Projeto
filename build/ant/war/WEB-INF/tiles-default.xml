@@ -14,7 +14,6 @@
         <put name="footer" value="footer.jsp" />
     </definition>
 
-
     <definition name="page.home" extends="base.definition">
         <put name="title" value="Bem vindos"/>
         <put name="body" value="home.jsp"/>
@@ -26,7 +25,6 @@
         <put name="body" value="login.jsp"/>
         <put name="footer" value="null.jsp"/>
     </definition>
-
 
     <definition name="page.user" extends="base.definition">
         <put name="title" value="Utilizadores"/>
@@ -46,6 +44,11 @@
         <put name="footer" value="null.jsp"/>
     </definition>
 
+    <definition name="page.pages" extends="base.definition">
+        <put name="title" value="Paginas"/>
+        <put name="body" value="pages.jsp"/>
+        <put name="footer" value="null.jsp"/>
+    </definition>
 
 
 

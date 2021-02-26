@@ -56,10 +56,6 @@
 %>
 <div>
     <ul>
-        <!--<li><a href="home.do">Home</a></li>
-        <li><a href="login.do">Login</a></li>
-        <li><a href="user.do">Users</a></li>-->
-
         <li>  <a id="home" class="navbar-item" href="<%=request.getContextPath()%>/home.do">Home</a></li>
         <li>  <a id="pages" class="navbar-item" href="<%=request.getContextPath()%>/page.do">Pages</a></li>
         <li>  <a id="users" class="navbar-item" href="<%=request.getContextPath()%>/user.do">Users</a></li>
