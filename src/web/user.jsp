@@ -48,6 +48,9 @@
                             <td>{{u.username}}</td>
                             <td>{{u.email}}</td>
                             <td>{{u.roles}}</td>
+                            <td>
+                                <button ng-click="deleteUser(u)"><span class="glyphicon glyphicon-remove"></span></button>
+                            </td>
                         </tr>
                     </tbody>
                     <tbody>
@@ -144,6 +147,20 @@
                             },
                         );
                     }
+
+                    $scope.deleteUser = function (u){
+                        send(
+                            "user.ServicoUser",
+                            "deleteUser",
+                            u,
+                            function(result)
+                            {
+                                angular.merge(u,result);
+                                $scope.$apply();
+                            },
+                        );
+                    }
+
 
                     $scope.listarUsers();
                 });
