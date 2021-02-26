@@ -17,27 +17,23 @@ public class LogoutServlet extends AbstractServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String User =null;
-        Cookie[] cookies = req.getCookies();
-
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("user")) {
-                    User = cookie.getValue();
-                    break;
-                }
-            }
-        }
-        logger.info("LOGOUT SERVLET"+User);
+        HttpSession s = req.getSession();
+        String user = req.getParameter("username");
+        String pass = req.getParameter("pwd");
+        logger.info(user);
+        logger.info(pass);
         ServicoLogout servLogout = new ServicoLogout();
-        if (servLogout.logout(User, null)) {
+        if (servLogout.logout(user, null)) {
+            logger.info("LOGOUT");
             HttpSession session = req.getSession();
             session.invalidate();
             String encodedURL = resp.encodeRedirectURL("login.do");
             resp.sendRedirect(encodedURL);
-
         }
-
+        else{
+            String encodedURL = resp.encodeRedirectURL("home.do");
+            resp.sendRedirect(encodedURL);
+        }
     }
 
     @Override

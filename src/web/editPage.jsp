@@ -34,7 +34,7 @@
 
 
 <html>
-<>
+
 <div id="load" ng-app="load" ng-controller="ctrl">
     <table>
         <thead>
