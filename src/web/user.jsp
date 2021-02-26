@@ -4,7 +4,7 @@
 <%@ taglib uri="/WEB-INF/tlds/struts-logic.tld"  prefix="logic" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld"  prefix="bean" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-tiles.tld"  prefix="tiles" %>
-<%@ page import="teste.servicos.user.ServicoUser" %>
+<%@ page import="teste.domain.UserImpl" %>
 
 <style>
     body{
@@ -50,8 +50,35 @@
                             <td>{{u.roles}}</td>
                         </tr>
                     </tbody>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="text" ng-model="u.nome">
+                            </td>
+
+                            <td>
+                                <input type="text" ng-model="u.username">
+                            </td>
+
+                            <td>
+                                <input type="text" ng-model="u.email">
+                            </td>
+
+                            <td>
+                                <input type="text" ng-model="u.roles">
+                            </td>
+                            <td>
+                                <button ng-click="adicionarUser()"><span class="btn btn-success" ></span></button>
+                            </td>
+                            <td>
+                                <button ng-click="SaveUser(u)"><span class="glyphicon glyphicon-disk"></span></button>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
+
+
 
             <script>
                 function send(servico, metodo, data, callbackOk){
@@ -95,7 +122,28 @@
                                 $scope.$apply();
                             },
                         );
-                    };
+                    }
+
+                    $scope.adicionarUser = function(){
+                        let s = {
+                            '@class' : '<%=UserImpl.class.getName()%>'
+                        }
+                        $scope.users.push(s);
+
+                    }
+
+                    $scope.SaveUser = function (u){
+                        send(
+                            "user.ServicoUser",
+                            "addUser",
+                            u,
+                            function(result)
+                            {
+                                angular.merge(u,result);
+                                $scope.$apply();
+                            },
+                        );
+                    }
 
                     $scope.listarUsers();
                 });
