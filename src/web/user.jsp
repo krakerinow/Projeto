@@ -31,53 +31,52 @@
 
 
 <html>
-<body>
-<div id="load" ng-app="load" ng-controller="ctrl">
-    <table>
-        <thead>
-        <tr>
-            <th>Nome</th>
-            <th>username</th>
-            <th>email</th>
-            <th>role</th>
-        </tr>
-        </thead>
-        <tbody ng-app="load" ng-controller="ctrl" ng-repeat="u in users" class="clearfix">
-        <tr>
-            <td>{{u.nome}}</td>
-            <td>{{u.username}}</td>
-            <td>{{u.email}}</td>
-            <td>{{u.roles}}</td>
-            <td> <button ng-click="deleteUser(u)"><span class="glyphicon glyphicon-remove"></span></button> </td>
-        </tr>
-        </tbody>
-        <tbody>
-        <tr>
-            <td>
-                <input type="text" ng-model="u.nome">
-            </td>
+        <body>
+            <div id="load" ng-app="load" ng-controller="ctrl">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>username</th>
+                            <th>email</th>
+                            <th>role</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-app="load" ng-controller="ctrl" ng-repeat="u in users" class="clearfix">
+                        <tr>
+                            <td>{{u.nome}}</td>
+                            <td>{{u.username}}</td>
+                            <td>{{u.email}}</td>
+                            <td>{{u.roles}}</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="text" ng-model="u.nome">
+                            </td>
 
-            <td>
-                <input type="text" ng-model="u.username">
-            </td>
+                            <td>
+                                <input type="text" ng-model="u.username">
+                            </td>
 
-            <td>
-                <input type="text" ng-model="u.email">
-            </td>
+                            <td>
+                                <input type="text" ng-model="u.email">
+                            </td>
 
-            <td>
-                <input type="text" ng-model="u.roles">
-            </td>
-            <td>
-                <button ng-click="adicionarUser()"><span class="btn btn-success" ></span></button>
-            </td>
-            <td>
-                <button ng-click="SaveUser(u)"><span class="glyphicon glyphicon-disk"></span></button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+                            <td>
+                                <input type="text" ng-model="u.roles">
+                            </td>
+                            <td>
+                                <button ng-click="adicionarUser()"><span class="btn btn-success" ></span></button>
+                            </td>
+                            <td>
+                                <button ng-click="SaveUser(u)"><span class="glyphicon glyphicon-disk"></span></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
 
 
@@ -146,20 +145,7 @@
                         );
                     }
 
-                    $scope.deleteUser = function (u){
-                        send(
-                            "user.ServicoUser",
-                            "deleteUser",
-                            u,
-                            function(result)
-                            {
-                                angular.merge(u,result);
-                                $scope.$apply();
-                            },
-                        );
-                    }
-
-                   $scope.listarUsers();
+                    $scope.listarUsers();
                 });
             </script>
         </body>
