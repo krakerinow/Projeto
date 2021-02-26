@@ -1,7 +1,6 @@
 package teste.servicos.user;
 
-//import org.hibernate.Transaction;
-//import org.hibernate.classic.Session;
+
 import org.hibernate.proxy.HibernateProxy;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -71,19 +70,15 @@ public class ServicoUser {
 
         JSONArray resultados = new JSONArray();
 
-        for(User s: user)
-        {
-            resultados.put(new JSONObject(((UserImpl)s).toJson()));
-        }
 
-
-       /* for(User u: user) {
+        for(User u: user) {
             if(u instanceof HibernateProxy) {
                 resultados.put(new JSONObject(((UserImpl)((HibernateProxy)u).getHibernateLazyInitializer().getImplementation()).toJson()));
             } else {
                 resultados.put(new JSONObject(((UserImpl)u).toJson()));
-            }*/
+            }
 
+        }
         return resultados;
     }
 

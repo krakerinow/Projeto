@@ -25,18 +25,15 @@ public class RestServlet extends AbstractServlet
             JSONObject jsonObject = new JSONObject(json);
 
             System.out.println(jsonObject.toString());
-
             String servico = jsonObject.getString("servico");
-            String op = jsonObject.getString("op");
+            String metodo = jsonObject.getString("metodo");
          //   JSONArray args= jsonObject.getJSONArray("args");
-
             try {
                 Object servicoObj = Class.forName("teste.servicos." + servico).newInstance();
-
-                Method m = servicoObj.getClass().getMethod(op,new Class[]{JSONObject.class});
+                Method m = servicoObj.getClass().getMethod(metodo,new Class[]{JSONObject.class});
                 Object ob =  m.invoke(servicoObj,jsonObject.getJSONObject("data"));
-
                 JSONObject response = new JSONObject();
+
                 response.put("execute",true);
 
                 response.put("data",ob);

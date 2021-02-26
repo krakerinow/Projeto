@@ -18,41 +18,35 @@ import java.util.List;
 
 public class ServicoLogin {
 
-    private static final Logger logger = Logger.getLogger(ServicoLogin.class);
 
     User u = null;
 
-    //@Transaction
-    //@injectSession
+    @Transaction
+    @injectSession
     public boolean Login(String user,String pwd, UserSession session) throws ServletException, IOException {
 
-        HibernateUtils.getCurrentSession().beginTransaction().begin();
+        //HibernateUtils.getCurrentSession().beginTransaction().begin();
+        //SecuritySessionContext securitySessionContext = SecurityContextProvider.getInstance().getSecuritySessionContext();
+        //session = (UserSession) HibernateUtils.getCurrentSession().load(UserSession.class, securitySessionContext.getRequester());
 
-        SecuritySessionContext securitySessionContext = SecurityContextProvider.getInstance().getSecuritySessionContext();
-        session = (UserSession) HibernateUtils.getCurrentSession().load(UserSession.class, securitySessionContext.getRequester());
         List<User> users = DaoFactory.createUserDao().createCriteria().list();
 
         for (User value : users) {
             if (value.getUsername().equals(user) && value.getPassword().equals(pwd)) {
-                //System.out.println(session.getCookie());
+                System.out.println(session.getCookie());
                 u = value;
-                logger.info(u);
                 session.setUser(value);
-                logger.info("PASSOU");
-                HibernateUtils.getCurrentSession().beginTransaction().commit();
+                //HibernateUtils.getCurrentSession().beginTransaction().commit();
                 return true;
             }
         }
-        HibernateUtils.getCurrentSession().beginTransaction().commit();
+        //HibernateUtils.getCurrentSession().beginTransaction().commit();
         return false;
 
     }
 
-    //@Transaction
-
+    @Transaction
     public String returnRole(){
-        HibernateUtils.getCurrentSession().beginTransaction().begin();
-        HibernateUtils.getCurrentSession().beginTransaction().commit();
         return u.getRoles();
     }
 }

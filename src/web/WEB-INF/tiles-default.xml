@@ -28,9 +28,9 @@
     </definition>
 
 
-    <definition name="page.logged" extends="base.definition">
-        <put name="title" value="Logado"/>
-        <put name="body" value="logged.jsp"/>
+    <definition name="page.user" extends="base.definition">
+        <put name="title" value="Utilizadores"/>
+        <put name="body" value="user.jsp"/>
         <put name="footer" value="null.jsp"/>
     </definition>
 

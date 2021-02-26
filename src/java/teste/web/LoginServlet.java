@@ -22,7 +22,6 @@ public class LoginServlet extends AbstractServlet
         logger.debug("Pedido do user com a pass: " + pass);
 
         if(servLogin.Login(user, pass,null)){
-            logger.info("123123131313131321");
             String roles = servLogin.returnRole();
             if(roles != null){
                 HttpSession session = req.getSession();
@@ -30,7 +29,7 @@ public class LoginServlet extends AbstractServlet
                 session.setAttribute("roles", roles);
                 Cookie userName = new Cookie("user", user);
                 resp.addCookie(userName);
-                String encodedURL = resp.encodeRedirectURL("logged.do");
+                String encodedURL = resp.encodeRedirectURL("user.do");
                 resp.sendRedirect(encodedURL);
             }
             else{
@@ -39,7 +38,7 @@ public class LoginServlet extends AbstractServlet
                 session.setAttribute("roles", "unassigned");
                 Cookie userName = new Cookie("user", user);
                 resp.addCookie(userName);
-                String encodedURL = resp.encodeRedirectURL("logged.do");
+                String encodedURL = resp.encodeRedirectURL("user.do");
                 resp.sendRedirect(encodedURL);
             }
         }else{

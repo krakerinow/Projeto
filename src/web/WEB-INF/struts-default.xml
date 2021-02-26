@@ -11,7 +11,7 @@
         <!--Portal Forward-->
         <action path="/home" forward="page.home"/>
         <action path="/login" forward="page.login"/>
-        <action path="/logged" forward="page.logged"/>
+        <action path="/user" forward="page.user"/>
 
     </action-mappings>
 

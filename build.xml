@@ -25,7 +25,7 @@
 			<include name="*.jar"/>
 		</fileset>
 
-		<fileset dir="lib/aspectj">
+		<fileset dir="${aspectj}">
 			<include name="*.jar"/>
 		</fileset>
 
@@ -34,10 +34,9 @@
 		</fileset>
 	</path>
 
-	<taskdef
-			resource="org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties">
+	<taskdef resource="org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties">
 		<classpath>
-			<pathelement location="lib/aspectj/aspectjtools.jar"/>
+			<pathelement location="${aspectj}/aspectjtools.jar"/>
 		</classpath>
 	</taskdef>
 
@@ -165,6 +164,9 @@
 	</target>
 
 	<target name="compile" depends="initDirs">
+		<iajc sourceroots="src" source="1.8" target="1.8" destdir="build/ant/classes"
+		classpath="${aspectj}/aspectjrt.jar" classpathref="pathref"/>
+
 		<javac includeantruntime="false" destdir="build/ant/classes"
 			   debug="true"
 			   encoding="UTF-8"
@@ -184,8 +186,10 @@
 			</fileset>
 		</copy>
 
+		<copy file="conf/jdbc.properties" todir="${build.dir.classes}/teste/domain"/>
 
 		<copy file="conf/jdbc.properties" todir="${build.dir.classes}/teste/domain"/>
+
 		<replace file="${build.dir.classes}/teste/domain/jdbc.properties">
 			<replacefilter token="@database.username@" value="${database.username}"/>
 			<replacefilter token="@database.password@" value="${database.password}"/>
