@@ -42,7 +42,7 @@ public class LoginServlet extends AbstractServlet
                 resp.sendRedirect(encodedURL);
             }
         }else{
-            String encodedURL = resp.encodeRedirectURL("http://localhost:8080/es/home.do");
+            String encodedURL = resp.encodeRedirectURL("http://localhost:8080/es/login.do?DadosErrados");
             resp.sendRedirect(encodedURL);
         }
     }

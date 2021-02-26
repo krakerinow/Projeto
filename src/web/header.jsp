@@ -46,12 +46,49 @@
     </style>
 </head>
 <body>
+<%
+    Cookie[] cookies = request.getCookies();
+    Boolean Logado = false;
+    if(cookies != null) {
+        for(Cookie c: cookies) {
+            if(c.getName().equals("user")) {
+                Logado = true;
+            }
+            else
+                Logado = false;
+        }
+    }
 
-<ul>
-    <li><a href="home.do">Home</a></li>
-    <li><a href="login.do">Login</a></li>
-    <li><a href="user.do">Users</a></li>
-</ul>
+%>
+<div>
+    <ul>
+        <!--<li><a href="home.do">Home</a></li>
+        <li><a href="login.do">Login</a></li>
+        <li><a href="user.do">Users</a></li>-->
+
+        <li>  <a id="home" class="navbar-item" href="<%=request.getContextPath()%>/home.do">Home</a></li>
+        <li> <a id="login" class="navbar-item" style="display: none;" href="<%=request.getContextPath()%>/login.do">Login</a></li>
+        <li> <a id="logout" class="navbar-item" style="display: none;" onclick="document.getElementById('logoutForm').submit();">Logout</a></li>
+    </ul>
+   <form id="logoutForm" style="display: none;" method="post" action="<%=request.getContextPath()%>/logout"></form>
+</div>
+
+
+
+
+<script>
+    $(function () {
+        if(<%=Logado%>) {
+            $("#login").css("display", "none");
+            $("#logout").css("display", "");
+            $("#home").css("display", "");
+        } else {
+            $("#logout").css("display", "none");
+            $("#home").css("display", "none");
+            $("#login").css("display", "");
+        }
+    })
+</script>
 
 </body>
 </html>

@@ -58,8 +58,17 @@
                         <span class="glyphicon glyphicon-lock"/>
                         <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
                     </div>
+                    <p style="color: #ff0000;font-weight: bold" id="erro"></p>
                     <input class="btn btn-success" type="submit">
                 </form>
             </div>
+
     </body>
+
+    <script>
+        if(window.location.href.indexOf("DadosErrados") > -1){
+            document.getElementById("erro").innerHTML = "ID ou Password errados";
+        }
+
+    </script>
 </html>
