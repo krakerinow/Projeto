@@ -44,6 +44,7 @@ public class ServerRegisterSession implements RegisterSession {
 
 
         session.setUser(u);
+        request.setAttribute("userLoggedIn",u);
 
         HibernateUtils.getCurrentSession().getTransaction().commit();
 

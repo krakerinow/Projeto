@@ -1,6 +1,7 @@
 package teste.web;
 
 import org.apache.log4j.Logger;
+import teste.domain.User;
 import teste.servicos.login.ServicoLogin;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -21,14 +22,14 @@ public class LoginServlet extends AbstractServlet
         logger.info("User pede login: " + user);
         logger.debug("Pedido do user com a pass: " + pass);
 
-        if(servLogin.Login(user, pass,null)){
+        User u = servLogin.Login(user, pass,null);
+        if(u!=null){
             String roles = servLogin.returnRole();
             if(roles != null){
                 HttpSession session = req.getSession();
+                req.setAttribute("userLoggedIn",u);
                 session.setAttribute("username", user);
                 session.setAttribute("roles", roles);
-                Cookie userName = new Cookie("user", user);
-                resp.addCookie(userName);
                 String encodedURL = resp.encodeRedirectURL("user.do");
                 resp.sendRedirect(encodedURL);
             }
@@ -36,8 +37,6 @@ public class LoginServlet extends AbstractServlet
                 HttpSession session = req.getSession();
                 session.setAttribute("username", user);
                 session.setAttribute("roles", "unassigned");
-                Cookie userName = new Cookie("user", user);
-                resp.addCookie(userName);
                 String encodedURL = resp.encodeRedirectURL("user.do");
                 resp.sendRedirect(encodedURL);
             }

@@ -1,3 +1,5 @@
+<%@ page import="org.apache.log4j.Logger" %>
+<%@ page import="teste.web.LogoutServlet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld"  prefix="html" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-nested.tld"  prefix="nested" %>
@@ -47,17 +49,9 @@
 </head>
 <body>
 <%
-    Cookie[] cookies = request.getCookies();
-    Boolean Logado = false;
-    if(cookies != null) {
-        for(Cookie c: cookies) {
-            if(c.getName().equals("user")) {
-                Logado = true;
-            }
-            else
-                Logado = false;
-        }
-    }
+    boolean logado = request.getAttribute("userLoggedIn")!=null;
+    Logger logger = Logger.getLogger(LogoutServlet.class);
+    logger.info(logado);
 
 %>
 <div>
@@ -69,10 +63,14 @@
         <li>  <a id="home" class="navbar-item" href="<%=request.getContextPath()%>/home.do">Home</a></li>
         <li>  <a id="pages" class="navbar-item" href="<%=request.getContextPath()%>/page.do">Pages</a></li>
         <li>  <a id="users" class="navbar-item" href="<%=request.getContextPath()%>/user.do">Users</a></li>
-        <li> <a id="login" class="navbar-item" style="display: none;" href="<%=request.getContextPath()%>/login.do">Login</a></li>
+        <li> <a id="login" class="navbar-item"  href="<%=request.getContextPath()%>/login.do">Login</a></li>
         <li> <a id="logout" class="navbar-item" style="display: none;" onclick="document.getElementById('logoutForm').submit();">Logout</a></li>
     </ul>
-   <form id="logoutForm" style="display: none;" method="post" action="<%=request.getContextPath()%>/logout"></form>
+    <form id="logoutForm" style="display: none;" method="post" action="<%=request.getContextPath()%>/logout">
+        <input type="text" id="username" name="username">
+    </form>
+
+
 </div>
 
 
@@ -80,7 +78,7 @@
 
 <script>
     $(function () {
-        if(<%=Logado%>) {
+        if(<%=logado == true%>) {
             $("#login").css("display", "none");
             $("#logout").css("display", "");
             $("#home").css("display", "");

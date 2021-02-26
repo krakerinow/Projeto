@@ -39,6 +39,7 @@
                             <th>Nome</th>
                             <th>username</th>
                             <th>email</th>
+                            <th>password</th>
                             <th>role</th>
                         </tr>
                     </thead>
@@ -47,9 +48,10 @@
                             <td>{{u.nome}}</td>
                             <td>{{u.username}}</td>
                             <td>{{u.email}}</td>
+                            <td>{{u.password}}</td>
                             <td>{{u.roles}}</td>
                             <td>
-                                <button ng-click="deleteUser(u)"><span class="glyphicon glyphicon-remove"></span></button>
+                                <button ng-click="deleteUser(u)"><span class="glyphicon glyphicon-remove" onClick="refreshPage()"></span></button>
                             </td>
                         </tr>
                     </tbody>
@@ -66,12 +68,14 @@
                             <td>
                                 <input type="text" ng-model="u.email">
                             </td>
-
+                            <td>
+                                <input type="password" ng-model="u.password">
+                            </td>
                             <td>
                                 <input type="text" ng-model="u.roles">
                             </td>
                             <td>
-                                <button ng-click="SaveUser(u)"><span class="btn btn-success" ></span></button>
+                                <button ng-click="SaveUser(u)"><span class="glyphicon glyphicon-ok" onClick="refreshPage()"></span></button>
                             </td>
                         </tr>
                     </tbody>
@@ -79,8 +83,15 @@
             </div>
 
 
+            <div id="xpto">
+
+            </div>
+
 
             <script>
+                function refreshPage(){
+                    window.location.reload();
+                }
                 function send(servico, metodo, data, callbackOk){
                     $.ajax({
                         type: "POST",
@@ -103,7 +114,7 @@
                         },
                         error: function(resposta)
                         {
-
+                             //   $(divMensagens).append("<div class='msg'>" + resposta + "</div>");
                         }
                     });
                 }

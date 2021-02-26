@@ -70,7 +70,7 @@
                         <input type="text" ng-model="u.roles">
                     </td>
                     <td>
-                        <button ng-click="SavePaginas(u)"><span class="btn btn-success" ></span></button>
+                        <button ng-click="SavePaginas(u)"><span class="glyphicon glyphicon-ok" ></span></button>
                     </td>
                 </tr>
                 </tbody>

@@ -23,7 +23,7 @@ public class ServicoLogin {
 
     @Transaction
     @injectSession
-    public boolean Login(String user,String pwd, UserSession session) throws ServletException, IOException {
+    public User Login(String user,String pwd, UserSession session) throws ServletException, IOException {
 
         //HibernateUtils.getCurrentSession().beginTransaction().begin();
         //SecuritySessionContext securitySessionContext = SecurityContextProvider.getInstance().getSecuritySessionContext();
@@ -37,11 +37,11 @@ public class ServicoLogin {
                 u = value;
                 session.setUser(value);
                 //HibernateUtils.getCurrentSession().beginTransaction().commit();
-                return true;
+                return u;
             }
         }
         //HibernateUtils.getCurrentSession().beginTransaction().commit();
-        return false;
+        return null;
 
     }
 

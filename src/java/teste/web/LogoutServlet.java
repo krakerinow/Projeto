@@ -1,7 +1,10 @@
 package teste.web;
 
 import org.apache.log4j.Logger;
+import teste.domain.UserSession;
 import teste.servicos.Logout.ServicoLogout;
+import teste.servicos.login.ServicoLogin;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -13,38 +16,17 @@ public class LogoutServlet extends AbstractServlet {
     private static final Logger logger = Logger.getLogger(LogoutServlet.class);
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        logger.info("LOGOUT");
+
+        HttpSession s = req.getSession();
+        s.getAttribute("username");
+        logger.info(s);
         String user = null;
-        Cookie[] cookies = req.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("user")) {
-                    user = cookie.getValue();
-                    break;
-                }
-            }
-        }
         ServicoLogout servLogout = new ServicoLogout();
         if (servLogout.logout(user, null)) {
-            Cookie loginCookie = null;
-            Cookie[] cookies1 = req.getCookies();
-            if (cookies1 != null) {
-                for (Cookie cookie : cookies1) {
-                    if (cookie.getName().equals("user")) {
-                        loginCookie = cookie;
-                        break;
-                    }
-                }
-            }
-            if (loginCookie != null) {
-                loginCookie.setMaxAge(0);
-                resp.addCookie(loginCookie);
-            }
-            //invalidate the session if exists
-            HttpSession session = req.getSession(false);
-            System.out.println("User=" + session.getAttribute("user"));
+            logger.info("LOGOUT");
+            HttpSession session = req.getSession();
             session.invalidate();
-            String encodedURL = resp.encodeRedirectURL("http://localhost:8080/es/login.do");
+            String encodedURL = resp.encodeRedirectURL("login.do");
             resp.sendRedirect(encodedURL);
         }
     }

@@ -64,6 +64,7 @@ public class ServicoUser {
 
     @isAuthenticated
     @Transaction
+    @HasRole(role="admin")
     public JSONArray loadAll(JSONObject dummy)
     {
         List<User> user = DaoFactory.createUserDao().createCriteria().list();
