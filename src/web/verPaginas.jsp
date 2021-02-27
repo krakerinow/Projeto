@@ -33,7 +33,7 @@
         <h2>Component.:</h2>
         <div ng-repeat="c in sections" style="padding-bottom: 1em;">
             <h3>{{ c.text }}</h3>
-            <h3>{{ c.path }}</h3>
+            <img src="imagens/{{c.path}}"/>
         </div>
         <hr/>
     </div>

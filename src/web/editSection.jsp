@@ -1,6 +1,3 @@
-<%@ page import="teste.domain.SectionImpl" %>
-<%@ page import="teste.domain.ComponentsImpl" %>
-<%@ page import="teste.domain.ComponentTextImpl" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld"  prefix="html" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-nested.tld"  prefix="nested" %>
