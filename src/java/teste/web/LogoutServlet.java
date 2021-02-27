@@ -20,6 +20,8 @@ public class LogoutServlet extends AbstractServlet {
         HttpSession s = req.getSession();
         String user = req.getParameter("username");
         String pass = req.getParameter("pwd");
+        logger.info(user);
+        logger.info(pass);
         ServicoLogout servLogout = new ServicoLogout();
         if (servLogout.logout(user, null)) {
             logger.info("LOGOUT");

@@ -25,22 +25,17 @@ public class ServicoLogin {
     @injectSession
     public User Login(String user,String pwd, UserSession session) throws ServletException, IOException {
 
-        //HibernateUtils.getCurrentSession().beginTransaction().begin();
-        //SecuritySessionContext securitySessionContext = SecurityContextProvider.getInstance().getSecuritySessionContext();
-        //session = (UserSession) HibernateUtils.getCurrentSession().load(UserSession.class, securitySessionContext.getRequester());
-
         List<User> users = DaoFactory.createUserDao().createCriteria().list();
 
         for (User value : users) {
             if (value.getUsername().equals(user) && value.getPassword().equals(pwd)) {
-                System.out.println(session.getCookie());
+               // System.out.println(session.getCookie());
                 u = value;
                 session.setUser(value);
-                //HibernateUtils.getCurrentSession().beginTransaction().commit();
                 return u;
             }
         }
-        //HibernateUtils.getCurrentSession().beginTransaction().commit();
+
         return null;
 
     }

@@ -18,8 +18,9 @@
     table{
         display: table;
         text-align: center;
-        margin-left: 30px;
-        margin-top: 30px;
+        position: absolute;
+        margin: auto;
+        width: 100%;
     }
 
     td, th {
@@ -31,6 +32,7 @@
     tr:nth-child(even) {
         background-color: #dddddd;
     }
+
 </style>
 
 
@@ -39,11 +41,14 @@
     String id = request.getParameter("id");
 %>
 <div id="load" ng-app="load" ng-controller="ctrl">
+
     <table>
         <thead>
         <tr>
             <th>ID</th>
             <th>Titulo da Secção</th>
+            <th>Editar</th>
+            <th>Modificaçoes</th>
         </tr>
         </thead>
         <tbody ng-app="load" ng-controller="ctrl" ng-repeat="u in sections" class="clearfix">
@@ -52,11 +57,11 @@
             <td>{{u.title}}</td>
             <td>
                 <a class="button" href="<%=request.getContextPath()%>/editSection.do?id={{u.id}}&idpag=<%=id%>">
-                    <span class="glyphicon glyphicon-cog" style="color: black; padding-left: 9px;"/>
+                    <span class="glyphicon glyphicon-cog" style="color: black; padding-left: 9px;"></span>
                 </a>
             </td>
             <td>
-                <button ng-click="deleteSections(u)"><span class="glyphicon glyphicon-remove" onClick="refreshPage()"></span></button>
+                <button ng-click="deleteSections(u)"><span class="glyphicon glyphicon-remove" onClick="refreshPage()"><b> REMOVER</b></span></button>
             </td>
         </tr>
         </tbody>
@@ -65,10 +70,12 @@
             <td>
             </td>
             <td>
-                <input type="text" ng-model="u.title">
+                <input type="text" ng-model="u.title" style="width: 100%">
             </td>
             <td>
-                <button ng-click="SaveSections(u)"><span class="glyphicon glyphicon-ok" onClick="refreshPage()" ></span></button>
+            </td>
+            <td>
+                <button ng-click="SaveSections(u)"><span class="glyphicon glyphicon-ok" onClick="refreshPage()" > <b>ADICIONAR</b></span></button>
             </td>
         </tr>
         </tbody>
@@ -163,6 +170,17 @@
                 },
             );
         }
+
+        $scope.addSection = function() {
+            let s = {
+                '@class' : '<%=SectionImpl.class.getName()%>'
+            };
+
+            if(!$scope.page.sections)
+                $scope.page.sections = [];
+            $scope.page.sections.push(s);
+        };
+
 
         $scope.listarsections();
     });

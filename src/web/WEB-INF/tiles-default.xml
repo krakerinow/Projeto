@@ -49,6 +49,11 @@
         <put name="body" value="editSection.jsp"/>
         <put name="footer" value="null.jsp"/>
     </definition>
+    <definition name="page.verPaginas" extends="base.definition">
+        <put name="title" value="Ver Paginas"/>
+        <put name="body" value="verPaginas.jsp"/>
+        <put name="footer" value="null.jsp"/>
+    </definition>
 
 
 

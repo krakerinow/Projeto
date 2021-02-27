@@ -25,8 +25,8 @@ public class LoginServlet extends AbstractServlet
         User u = servLogin.Login(user, pass,null);
         if(u!=null){
             String roles = servLogin.returnRole();
-            HttpSession session = req.getSession();
             if(roles != null){
+                HttpSession session = req.getSession();
                 req.setAttribute("userLoggedIn",u);
                 session.setAttribute("username", user);
                 session.setAttribute("roles", roles);
@@ -34,6 +34,7 @@ public class LoginServlet extends AbstractServlet
                 resp.sendRedirect(encodedURL);
             }
             else{
+                HttpSession session = req.getSession();
                 session.setAttribute("username", user);
                 session.setAttribute("roles", "unassigned");
                 String encodedURL = resp.encodeRedirectURL("user.do");

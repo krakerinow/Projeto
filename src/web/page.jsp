@@ -29,6 +29,7 @@
     tr:nth-child(even) {
         background-color: #dddddd;
     }
+
 </style>
 
 
@@ -56,6 +57,11 @@
                     <td>
                         <button ng-click="deletePaginas(u)"><span class="glyphicon glyphicon-remove" onClick="refreshPage()" ></span></button>
                     </td>
+                    <td>
+                        <a class="button" href="<%=request.getContextPath()%>/verPaginas.do?id={{u.id}}">
+                            <span class="glyphicon glyphicon-eye-open" style="color: black; padding-left: 9px;"/>
+                        </a>
+                    </td>
                 </tr>
                 </tbody>
                 <tbody>
@@ -72,6 +78,7 @@
                     <td>
                         <button ng-click="SavePaginas(u)"><span class="glyphicon glyphicon-ok" onClick="refreshPage()" ></span></button>
                     </td>
+
                 </tr>
                 </tbody>
             </table>

@@ -59,18 +59,16 @@ public class ServicoSection {
         Page page = DaoFactory.createPageDao().load(dummy.getLong("idpag"));
         JSONArray resultados = new JSONArray();
 
-        logger.info("ESTE E O DUMMY " + dummy);
-
+        logger.info("este e o dummy"+dummy);
         for(Section s: page.getSections()) {
-            logger.info("S getID " + s.getId());
-            logger.info("dummy ID " + dummy.getLong("id"));
-            logger.info(s.getId() == dummy.getLong("id"));
+
             if (s.getId() == dummy.getLong("id")) {
                 for (Components c : s.getComponents()) {
                     resultados.put(new JSONObject(((ComponentsImpl) c).toJson()));
                 }
             }
         }
+        logger.info("este sao os resul"+resultados);
         return resultados;
     }
 
