@@ -42,24 +42,44 @@
     <table>
         <thead>
         <tr>
+            <th>ID</th>
             <th>Titulo da Secção</th>
         </tr>
         </thead>
-        <tbody ng-app="load" ng-controller="ctrl" ng-repeat="u in page.sections" class="clearfix">
+        <tbody ng-app="load" ng-controller="ctrl" ng-repeat="u in sections" class="clearfix">
         <tr>
+            <td>{{u.id}}</td>
             <td>{{u.title}}</td>
+            <td>
+                <a class="button" href="<%=request.getContextPath()%>/editSection.do?id={{u.id}}">
+                    <span class="glyphicon glyphicon-cog" style="color: black; padding-left: 9px;"/>
+                </a>
+            </td>
+            <td>
+                <button ng-click="deleteSections(u)"><span class="glyphicon glyphicon-remove" onClick="refreshPage()"></span></button>
+            </td>
         </tr>
         </tbody>
         <tbody>
         <tr>
             <td>
+            </td>
+            <td>
                 <input type="text" ng-model="u.title">
+            </td>
+            <td>
+                <button ng-click="SaveSections(u)"><span class="glyphicon glyphicon-ok" onClick="refreshPage()" ></span></button>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
 <script>
+
+    function refreshPage(){
+        window.location.reload();
+    }
+
     function send(servico, metodo, data, callbackOk){
         $.ajax({
             type: "POST",
@@ -99,13 +119,46 @@
         $scope.listarsections = function(){
             send(
                 "section.ServicoSection",
-                "returnAll",
+                "returnSections",
                 {
                     id: $scope.id,
                 },
                 function(result)
                 {
                     $scope.sections = result;
+                    $scope.$apply();
+                },
+            );
+        }
+
+
+        $scope.deleteSections = function (u){
+            send(
+                "section.ServicoSection",
+                "deleteSection",
+                {
+                    id: u.id,
+                    title: u.title,
+                },
+                function(result)
+                {
+                    angular.merge(u,result);
+                    $scope.$apply();
+                },
+            );
+        }
+
+        $scope.SaveSections = function (u){
+            send(
+                "section.ServicoSection",
+                "addSection",
+                {
+                    idPage: $scope.id,
+                    title: u.title,
+                },
+                function(result)
+                {
+                    angular.merge(u,result);
                     $scope.$apply();
                 },
             );
