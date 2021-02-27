@@ -19,14 +19,11 @@ import java.util.List;
 
 public class ServicoPage {
 
-    private static final Logger logger = Logger.getLogger(ServicoPage.class);
-
     @isAuthenticated
     @HasRole(role="admin")
     @Transaction
     public JSONObject addPage(JSONObject page){
 
-        logger.info("Criar paginas");
         PageImpl s = PageImpl.fromJson(page);
         String cookie = SecurityContextProvider.getInstance().getSecuritySessionContext().getRequester();
         UserSession session = (UserSession) HibernateUtils.getCurrentSession().load(UserSession.class,cookie);
@@ -68,7 +65,6 @@ public class ServicoPage {
     @isAuthenticated
     @Transaction
     public JSONArray loadAll(JSONObject dummy) {
-        logger.info("Lista paginas");
         List<Page> pages = DaoFactory.createPageDao().createCriteria().list();
         JSONArray results = new JSONArray();
 

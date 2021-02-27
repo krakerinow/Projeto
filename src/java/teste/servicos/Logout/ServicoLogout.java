@@ -23,7 +23,6 @@ public class ServicoLogout {
         for (UserSession value : users) {
             if (value.getUser().getUsername().equals(user)) {
                 DaoFactory.createUserSessionDao().delete(session);
-                logger.info("LOGOUT 113531535665654564564654553445645645645645645661513");
                 return true;
             }
         }

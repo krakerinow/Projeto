@@ -1,5 +1,5 @@
 package teste.domain;
-// Generated 26-Feb-2021 21:04:08 by Hibernate Tools 3.2.0.b9
+// Generated 27-Feb-2021 00:13:07 by Hibernate Tools 3.2.0.b9
 
 
 import java.util.Date;
@@ -12,6 +12,7 @@ public abstract class Components  implements java.io.Serializable {
 
      private long id;
      private Date updateDate;
+     private String path;
      private Section section;
 
     public Components() {
@@ -31,6 +32,13 @@ public abstract class Components  implements java.io.Serializable {
     
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+    public String getPath() {
+        return this.path;
+    }
+    
+    public void setPath(String path) {
+        this.path = path;
     }
     public Section getSection() {
         return this.section;

@@ -1,5 +1,6 @@
 <%@ page import="teste.domain.SectionImpl" %>
 <%@ page import="teste.domain.ComponentsImpl" %>
+<%@ page import="teste.domain.ComponentTextImpl" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld"  prefix="html" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-nested.tld"  prefix="nested" %>
@@ -34,7 +35,9 @@
 
 
 <html>
-
+<%
+    String id = request.getParameter("id");
+%>
 <div id="load" ng-app="load" ng-controller="ctrl">
     <table>
         <thead>
@@ -42,22 +45,17 @@
             <th>Titulo da Secção</th>
         </tr>
         </thead>
-        <tbody ng-app="load" ng-controller="ctrl" ng-repeat="u in sections" class="clearfix">
-            <tr>
-                <td>{{u.titulo}}</td>
-            </tr>
-            <tr>
-                <table>
-                    <thead>
-                        <tr>Titulo do componente</tr>
-                        <tr>Texto</tr>
-                    </thead>
-                    <tbody ng-app="load" ng-controller="ctrl" ng-repeat="s in components" class="clearfix">
-                        <tr>{{s.titulo}}</tr>
-                        <tr>{{s.texto}}</tr>
-                    </tbody>
-                </table>
-            </tr>
+        <tbody ng-app="load" ng-controller="ctrl" ng-repeat="u in page.sections" class="clearfix">
+        <tr>
+            <td>{{u.title}}</td>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr>
+            <td>
+                <input type="text" ng-model="u.title">
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>
@@ -90,14 +88,21 @@
     }
     let app = angular.module("load", []);
     app.controller("ctrl", function($scope) {
-        $scope.components = [];
-        $scope.sections = [];
+
+        $scope.id = <%=id%>;
+        $scope.page = {
+            sections: [
+                { components: [] }
+            ]
+        };
 
         $scope.listarsections = function(){
             send(
                 "section.ServicoSection",
                 "returnAll",
-                {},
+                {
+                    id: $scope.id,
+                },
                 function(result)
                 {
                     $scope.sections = result;
@@ -105,83 +110,6 @@
                 },
             );
         }
-
-        $scope.adicionarSection = function(){
-            let s = {
-                '@class' : '<%=SectionImpl.class.getName()%>'
-            }
-            $scope.sections.push(s);
-
-        }
-
-        $scope.saveSections = function (u){
-            send(
-                "section.ServicoSection",
-                "addSection",
-                u,
-                function(result)
-                {
-                    angular.merge(u,result);
-                    $scope.$apply();
-                },
-            );
-        }
-
-        $scope.deleteSections = function (u){
-            send(
-                "section.ServicoSection",
-                "deleteSection",
-                u,
-                function(result)
-                {
-                    angular.merge(u,result);
-                    $scope.$apply();
-                },
-            );
-        }
-
-
-        $scope.adicionarcomponents = function(){
-            let s = {
-                '@class' : '<%=ComponentsImpl.class.getName()%>'
-            }
-            $scope.components.push(s);
-
-        }
-
-        $scope.saveSections = function (u){
-            send(
-                "section.ServicoSection",
-                "addSection",
-                u,
-                function(result)
-                {
-                    angular.merge(u,result);
-                    $scope.$apply();
-                },
-            );
-        }
-
-        $scope.deleteSections = function (u){
-            send(
-                "section.ServicoSection",
-                "deleteSection",
-                u,
-                function(result)
-                {
-                    angular.merge(u,result);
-                    $scope.$apply();
-                },
-            );
-        }
-
-
-
-
-
-
-
-
 
         $scope.listarsections();
     });

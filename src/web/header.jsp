@@ -50,9 +50,6 @@
 <body>
 <%
     boolean logado = request.getAttribute("userLoggedIn")!=null;
-    Logger logger = Logger.getLogger(LogoutServlet.class);
-    logger.info(logado);
-
 %>
 <div>
     <ul>

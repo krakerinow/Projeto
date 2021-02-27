@@ -50,7 +50,7 @@
                     <td>{{u.roles}}</td>
                     <td>
                         <a class="button" href="<%=request.getContextPath()%>/editPage.do?id={{u.id}}">
-                            <span class="glyphicon glyphicon-cog" style="color: black; padding-left: 13px;"/>
+                            <span class="glyphicon glyphicon-cog" style="color: black; padding-left: 9px;"/>
                         </a>
                     </td>
                     <td>

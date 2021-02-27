@@ -14,6 +14,7 @@ public class ComponentsImpl extends Components {
             .useClassMetadata(true)
             .useRuntimeType(true)
             .include("id",Components.class)
+            .include("path",Components.class)
             .create();
 
 
@@ -31,6 +32,7 @@ public class ComponentsImpl extends Components {
     public String toString() {
         return "Component{" +
                 "id=" + getId() +
+                ", path='" + getPath() +
                 '}';
     }
 

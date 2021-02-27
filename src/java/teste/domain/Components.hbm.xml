@@ -13,7 +13,7 @@
 
         <discriminator column="discriminator"/>
         <timestamp source="db" name="updateDate" unsaved-value="null"/>
-
+        <property name="path" type="string"/>
         <many-to-one name="section" class="teste.domain.Section" column="idSection" outer-join="true" cascade="none"/>
 
         <subclass name="teste.domain.ComponentsImpl" discriminator-value="ComponentsImpl">

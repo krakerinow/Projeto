@@ -16,7 +16,7 @@ public class ServicoComponentes {
     @HasRole(role="admin")
     @Transaction
     public JSONObject addComponentText(JSONObject component){
-        long idSection = component.getLong("idSection");
+        long idSection = component.getLong("id");
         ComponentTextImpl s = ComponentTextImpl.fromJson(component);
         Section section = DaoFactory.createSectionDao().load(idSection);
 
@@ -43,7 +43,7 @@ public class ServicoComponentes {
     @HasRole(role="admin")
     @Transaction
     public void deleteComponent(JSONObject component) {
-        Components c = (Components) HibernateUtils.getCurrentSession().load(Components.class, component.getLong("idComponent"));
+        Components c = (Components) HibernateUtils.getCurrentSession().load(Components.class, component.getLong("id"));
 
         HibernateUtils.getCurrentSession().delete(c);
     }

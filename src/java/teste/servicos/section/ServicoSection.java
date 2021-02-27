@@ -1,5 +1,6 @@
 package teste.servicos.section;
 
+import org.apache.log4j.Logger;
 import teste.domain.*;
 //import org.hibernate.Transaction;
 //import org.hibernate.classic.Session;
@@ -13,15 +14,18 @@ import teste.utils.HibernateUtils;
 import teste.servicepack.security.logic.HasRole;
 import teste.servicepack.security.logic.Transaction;
 import teste.servicepack.security.logic.isAuthenticated;
+import teste.web.LoginServlet;
 
 public class ServicoSection {
+
+    private static final Logger logger = Logger.getLogger(ServicoSection.class);
 
     @isAuthenticated
     @HasRole(role="admin")
     @Transaction
     public JSONObject addSection(JSONObject section){
 
-        long idPage = section.getLong("idPage");
+        long idPage = section.getLong("id");
         Page page = DaoFactory.createPageDao().load(idPage);
         SectionImpl s = SectionImpl.fromJson(section);
 
@@ -50,6 +54,7 @@ public class ServicoSection {
     @Transaction
     public JSONArray returnAll(JSONObject dummy) throws JSONException
     {
+        logger.info("Este e o dummy" + dummy);
         Page page = DaoFactory.createPageDao().load(dummy.getLong("id"));
         JSONArray resultados = new JSONArray();
 
@@ -68,7 +73,7 @@ public class ServicoSection {
     @HasRole(role = "admin")
     @Transaction
     public void deleteSection(JSONObject section) {
-        Section s = (Section) HibernateUtils.getCurrentSession().load(Section.class, section.getLong("idSection"));
+        Section s = (Section) HibernateUtils.getCurrentSession().load(Section.class, section.getLong("id"));
 
         HibernateUtils.getCurrentSession().delete(s);
     }
