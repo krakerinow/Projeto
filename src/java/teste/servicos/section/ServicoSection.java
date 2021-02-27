@@ -85,8 +85,8 @@ public class ServicoSection {
         for(Section s: page.getSections()) {
             for (Components c : s.getComponents()) {
                 resultados.put(new JSONObject(((ComponentsImpl) c).toJson()));
-                }
             }
+        }
 
         logger.info("este sao os resul"+resultados);
         return resultados;
@@ -104,7 +104,7 @@ public class ServicoSection {
 
         for(Section s: page.getSections())
         {
-                resultados.put(new JSONObject(((SectionImpl) s).toJson()));
+            resultados.put(new JSONObject(((SectionImpl) s).toJson()));
         };
         logger.info(resultados);
         return resultados;

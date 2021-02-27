@@ -16,8 +16,10 @@
     table{
         display: table;
         text-align: center;
-        margin-left: 30px;
-        margin-top: 30px;
+        position: absolute;
+        margin: auto;
+        width: 100%;
+
     }
 
     td, th {
@@ -29,19 +31,26 @@
     tr:nth-child(even) {
         background-color: #dddddd;
     }
+    input{
+        width: 100%;
+    }
+
 
 </style>
 
 
 <html>
     <body>
-        <div id="load" ng-app="load" ng-controller="ctrl">
+        <div id="load" ng-app="load" ng-controller="ctrl" >
             <table>
                 <thead>
                 <tr>
-                    <th>id</th>
-                    <th>title</th>
-                    <th>role</th>
+                    <th>Id</th>
+                    <th>Titulo</th>
+                    <th>Roles</th>
+                    <th>Editar</th>
+                    <th>Remover</th>
+                    <th>Visualizar</th>
                 </tr>
                 </thead>
                 <tbody ng-app="load" ng-controller="ctrl" ng-repeat="u in paginas" class="clearfix">
@@ -70,10 +79,10 @@
 
                     </td>
                     <td>
-                        <input type="text" ng-model="u.title">
+                        <input placeholder="Insira  o tiutlo" type="text" ng-model="u.title">
                     </td>
                     <td>
-                        <input type="text" ng-model="u.roles">
+                        <input placeholder="Insira os roles" type="text" ng-model="u.roles">
                     </td>
                     <td>
                         <button ng-click="SavePaginas(u)"><span class="glyphicon glyphicon-ok" onClick="refreshPage()" ></span></button>

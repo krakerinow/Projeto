@@ -14,8 +14,9 @@
     table{
         display: table;
         text-align: center;
-        margin-left: 30px;
-        margin-top: 30px;
+        position: absolute;
+        margin: auto;
+        width: 100%;
     }
 
     td, th {
@@ -27,6 +28,10 @@
     tr:nth-child(even) {
         background-color: #dddddd;
     }
+
+    input{
+        width: 100%;
+    }
 </style>
 
 
@@ -37,10 +42,10 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>username</th>
-                            <th>email</th>
-                            <th>password</th>
-                            <th>role</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th>Role</th>
                         </tr>
                     </thead>
                     <tbody ng-app="load" ng-controller="ctrl" ng-repeat="u in users" class="clearfix">
@@ -58,21 +63,21 @@
                     <tbody>
                         <tr>
                             <td>
-                                <input type="text" ng-model="u.nome">
+                                <input placeholder="Insira o nome" type="text" ng-model="u.nome">
                             </td>
 
                             <td>
-                                <input type="text" ng-model="u.username">
+                                <input  placeholder="Insira o username" type="text" ng-model="u.username">
                             </td>
 
                             <td>
-                                <input type="text" ng-model="u.email">
+                                <input placeholder="Insira o email" type="text" ng-model="u.email">
                             </td>
                             <td>
-                                <input type="password" ng-model="u.password">
+                                <input placeholder="Insira a password" type="password" ng-model="u.password">
                             </td>
                             <td>
-                                <input type="text" ng-model="u.roles">
+                                <input placeholder="Insira os roles" type="text" ng-model="u.roles">
                             </td>
                             <td>
                                 <button ng-click="SaveUser(u)"><span class="glyphicon glyphicon-ok" onClick="refreshPage()"></span></button>

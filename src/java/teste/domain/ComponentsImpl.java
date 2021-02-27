@@ -36,6 +36,7 @@ public class ComponentsImpl extends Components {
                 "id=" + getId() +
                 ", path='" + getPath() +
                 ", text='" + getText() +
+                ", idSection='" + getSection()+
                 '}';
     }
 

@@ -7,6 +7,7 @@
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld"  prefix="bean" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-tiles.tld"  prefix="tiles" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!DOCTYPE html>
 <html>
 
@@ -16,30 +17,29 @@
             background-color: silver;
         }
 
-
     </style>
 
 <body>
 <%
     String id = request.getParameter("id");
 %>
-
-<div id="load" ng-app="load" ng-controller="ctrl">
-    <h2 class="title is-1 has-text-centered has-text-white">{{ page.title }}</h2>
-
-    <div ng-repeat="s in page.sections" style="padding-bottom: 1em;">
-        <h2>Section Title.:</h2>
-        <h3>{{ s.title }}</h3>
-        <h2>Component.:</h2>
-        <div ng-repeat="c in s.components" style="padding-bottom: 1em;">
-            <h3>{{ c.text }}</h3>
-            <img src="imagens/{{c.path}}"/>
+    <div id="load" ng-app="load" ng-controller="ctrl" style="padding-left:20px;padding-right: 20px ">
+        <div class="w3-panel w3-dark-gray w3-round-xlarge" style="padding:inherit;text-align: center;"><b style="color: white;font-size:25px;font-family: Serif ">{{page.title}}</b></div>
+        <div id="accordion" ng-repeat="s in page.sections" style="padding-top: 1% ;" >
+            <div class="panel panel-default w3-round-xlarge " >
+                <div class="panel-heading w3-grey w3-round-xlarge" >
+                    <h4 class="panel-title" style="text-align: center;font-family: -webkit-pictograph " >
+                        <b> {{s.title}}</b>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse in" ng-repeat="c in s.components">
+                    <div class="panel-body" style="text-align: center">{{c.text}}
+                    </div>
+                </div>
+            </div>
         </div>
-        <hr/>
     </div>
-</div>
-</body>
-
+ </body>
 <script>
     function send(servico, metodo, data, callbackOk){
         $.ajax({
@@ -98,23 +98,7 @@
             );
         }
 
-        $scope.listarcomponents = function(){
-            send(
-                "section.ServicoSection",
-                "Components",
-                {
-                    idpag: $scope.pageid,
-                },
-                function(result)
-                {
-                    $scope.sections= result;
-                    $scope.$apply();
-                },
-            );
-        }
-
         $scope.loadPage();
-        //$scope.listarcomponents();
     });
 </script>
 </body>

@@ -15,8 +15,9 @@
     table{
         display: table;
         text-align: center;
-        margin-left: 30px;
-        margin-top: 30px;
+        position: absolute;
+        margin: auto;
+        width: 100%;
     }
 
     td, th {
@@ -27,6 +28,9 @@
 
     tr:nth-child(even) {
         background-color: #dddddd;
+    }
+    input{
+        width: 100%;
     }
 </style>
 
@@ -60,10 +64,10 @@
             <td>
             </td>
             <td>
-                <input type="text" ng-model="u.text">
+                <input  placeholder="Insira o texto" type="text" ng-model="u.text">
             </td>
             <td>
-                <input type="text" ng-model="u.path">
+                <input  placeholder="Insira o path da imagem" type="text" ng-model="u.path">
             </td>
             <td>
                 <button ng-click="SaveComponentes(u)"><span class="glyphicon glyphicon-ok" onClick="refreshPage()" ></span></button>

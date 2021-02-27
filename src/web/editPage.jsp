@@ -31,7 +31,9 @@
     tr:nth-child(even) {
         background-color: #dddddd;
     }
-
+    input{
+        width: 100%;
+    }
 </style>
 
 
@@ -60,7 +62,7 @@
                 </a>
             </td>
             <td>
-                <button ng-click="deleteSections(u)"><span class="glyphicon glyphicon-remove" onClick="refreshPage()"><b> REMOVER</b></span></button>
+                <button ng-click="deleteSections(u)"><span class="glyphicon glyphicon-remove" onClick="refreshPage()"></span></button>
             </td>
         </tr>
         </tbody>
@@ -69,12 +71,12 @@
             <td>
             </td>
             <td>
-                <input type="text" ng-model="u.title" style="width: 100%">
+                <input placeholder="Insira o titulo" type="text" ng-model="u.title" style="width: 100%">
             </td>
             <td>
             </td>
             <td>
-                <button ng-click="SaveSections(u)"><span class="glyphicon glyphicon-ok" onClick="refreshPage()" > <b>ADICIONAR</b></span></button>
+                <button ng-click="SaveSections(u)"><span class="glyphicon glyphicon-ok" onClick="refreshPage()" ></span></button>
             </td>
         </tr>
         </tbody>
