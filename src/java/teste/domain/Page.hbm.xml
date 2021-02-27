@@ -17,7 +17,7 @@
         <property name="roles" type="string"/>
         <many-to-one name="user" class="teste.domain.User" column="owner"/>
 
-        <set name="sections" cascade="none">
+        <set name="sections" cascade="none" order-by="id">
             <key column="idPage"/>
             <one-to-many class="teste.domain.Section"/>
         </set>

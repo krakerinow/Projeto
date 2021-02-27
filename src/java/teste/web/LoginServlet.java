@@ -41,8 +41,8 @@ public class LoginServlet extends AbstractServlet
                 resp.sendRedirect(encodedURL);
             }
         }else{
-            HttpSession session = req.getSession();
-            session.invalidate();
+            //HttpSession session = req.getSession();
+            //session.invalidate();
             String encodedURL = resp.encodeRedirectURL("http://localhost:8080/es/login.do");
             resp.sendRedirect(encodedURL);
         }

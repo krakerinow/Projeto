@@ -15,7 +15,7 @@
         <timestamp source="db" name="updateDate" unsaved-value="null"/>
         <property name="title" type="string"/>
         <many-to-one name="page" class="teste.domain.Page" column="idPage"/>
-        <set name="components" cascade="none">
+        <set name="components" cascade="none" order-by="id">
             <key column="idSection"/>
             <one-to-many class="teste.domain.ComponentsImpl"/>
         </set>

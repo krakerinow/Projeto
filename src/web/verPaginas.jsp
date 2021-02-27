@@ -31,7 +31,7 @@
         <h2>Section Title.:</h2>
         <h3>{{ s.title }}</h3>
         <h2>Component.:</h2>
-        <div ng-repeat="c in sections" style="padding-bottom: 1em;">
+        <div ng-repeat="c in s.components" style="padding-bottom: 1em;">
             <h3>{{ c.text }}</h3>
             <img src="imagens/{{c.path}}"/>
         </div>
@@ -114,7 +114,7 @@
         }
 
         $scope.loadPage();
-        $scope.listarcomponents();
+        //$scope.listarcomponents();
     });
 </script>
 </body>

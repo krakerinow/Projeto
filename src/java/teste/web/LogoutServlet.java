@@ -18,22 +18,16 @@ public class LogoutServlet extends AbstractServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession s = req.getSession();
-        String user = req.getParameter("username");
-        String pass = req.getParameter("pwd");
-        logger.info(user);
-        logger.info(pass);
+        //String user = req.getParameter("username");
+        //String pass = req.getParameter("pwd");
+        //logger.info(user);
+        //logger.info(pass);
         ServicoLogout servLogout = new ServicoLogout();
-        if (servLogout.logout(user, null)) {
-            logger.info("LOGOUT");
-            HttpSession session = req.getSession();
-            session.invalidate();
-            String encodedURL = resp.encodeRedirectURL("login.do");
-            resp.sendRedirect(encodedURL);
-        }
-        else{
-            String encodedURL = resp.encodeRedirectURL("home.do");
-            resp.sendRedirect(encodedURL);
-        }
+        servLogout.logout( null);
+        logger.info("LOGOUT");
+        String encodedURL = resp.encodeRedirectURL("home.do");
+        resp.sendRedirect(encodedURL);
+
     }
 
     @Override

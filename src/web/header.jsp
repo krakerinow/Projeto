@@ -59,7 +59,7 @@
         <li> <a id="login" class="navbar-item"  href="<%=request.getContextPath()%>/login.do">Login</a></li>
         <li> <a id="logout" class="navbar-item" style="display: none;" onclick="document.getElementById('logoutForm').submit();">Logout</a></li>
     </ul>
-    <form id="logoutForm" style="display: none;" method="post" action="<%=request.getContextPath()%>/login">
+    <form id="logoutForm" style="display: none;" method="post" action="<%=request.getContextPath()%>/logout">
     </form>
 
 
