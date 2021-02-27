@@ -44,12 +44,13 @@
         <put name="footer" value="null.jsp"/>
     </definition>
 
-    <definition name="page.logout" extends="base.definition">
-        <put name="title" value="Logged out"/>
-        <put name="header" value="header.jsp"/>
-        <put name="body" value="logout.jsp"/>
+    <definition name="page.editSection" extends="base.definition">
+        <put name="title" value="Editar"/>
+        <put name="body" value="editSection.jsp"/>
         <put name="footer" value="null.jsp"/>
     </definition>
+
+
 
 
 

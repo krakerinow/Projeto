@@ -51,7 +51,7 @@
             <td>{{u.id}}</td>
             <td>{{u.title}}</td>
             <td>
-                <a class="button" href="<%=request.getContextPath()%>/editSection.do?id={{u.id}}">
+                <a class="button" href="<%=request.getContextPath()%>/editSection.do?id={{u.id}}&idpag=<%=id%>">
                     <span class="glyphicon glyphicon-cog" style="color: black; padding-left: 9px;"/>
                 </a>
             </td>

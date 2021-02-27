@@ -54,7 +54,7 @@
                         </a>
                     </td>
                     <td>
-                        <button ng-click="deletePaginas(u)"><span class="glyphicon glyphicon-remove"></span></button>
+                        <button ng-click="deletePaginas(u)"><span class="glyphicon glyphicon-remove" onClick="refreshPage()" ></span></button>
                     </td>
                 </tr>
                 </tbody>
@@ -70,13 +70,17 @@
                         <input type="text" ng-model="u.roles">
                     </td>
                     <td>
-                        <button ng-click="SavePaginas(u)"><span class="glyphicon glyphicon-ok" ></span></button>
+                        <button ng-click="SavePaginas(u)"><span class="glyphicon glyphicon-ok" onClick="refreshPage()" ></span></button>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
         <script>
+
+            function refreshPage(){
+                window.location.reload();
+            }
             function send(servico, metodo, data, callbackOk){
                 $.ajax({
                     type: "POST",

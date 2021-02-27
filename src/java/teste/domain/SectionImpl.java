@@ -23,8 +23,6 @@ public class SectionImpl extends Section {
 
     public static SectionImpl fromJson(JSONObject jsonObject)
     {
-        logger.info("OBJETO JSON  " + jsonObject);
-        logger.info("SECTIONIMPL  " + genson.deserialize(jsonObject.toString(), SectionImpl.class));
         return genson.deserialize(jsonObject.toString(), SectionImpl.class);
     }
 

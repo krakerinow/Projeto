@@ -1,30 +1,38 @@
 package teste.servicos.componentes;
 
+import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import teste.domain.Components;
-import teste.domain.ComponentTextImpl;
+import teste.domain.ComponentsImpl;
 import teste.domain.Section;
+import teste.domain.SectionImpl;
 import teste.domain.dao.DaoFactory;
 import teste.servicepack.security.logic.HasRole;
 import teste.servicepack.security.logic.Transaction;
 import teste.servicepack.security.logic.isAuthenticated;
+import teste.servicos.section.ServicoSection;
 import teste.utils.HibernateUtils;
 
 public class ServicoComponentes {
 
+
+
+
     @isAuthenticated
     @HasRole(role="admin")
     @Transaction
-    public JSONObject addComponentText(JSONObject component){
-        long idSection = component.getLong("id");
-        ComponentTextImpl s = ComponentTextImpl.fromJson(component);
+    public JSONObject addComponent(JSONObject component){
+        long idSection = component.getLong("idSection");
+        ComponentsImpl s = ComponentsImpl.fromJson(component);
         Section section = DaoFactory.createSectionDao().load(idSection);
 
         if(s.getId() > 0)
         {
-            ComponentTextImpl sPersistente = (ComponentTextImpl) DaoFactory.createComponentsDao().get(s.getId());
+            ComponentsImpl sPersistente = (ComponentsImpl) DaoFactory.createComponentsDao().get(s.getId());
 
+            sPersistente.setId(s.getId());
             sPersistente.setText(s.getText());
+            sPersistente.setPath(s.getPath());
 
             JSONObject jsonObject = new JSONObject(sPersistente.toJson());
 

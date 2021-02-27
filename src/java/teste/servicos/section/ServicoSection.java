@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import teste.domain.Section;
 import teste.domain.SectionImpl;
 import teste.domain.dao.DaoFactory;
+import teste.servicos.componentes.ServicoComponentes;
 import teste.utils.HibernateUtils;
 import teste.servicepack.security.logic.HasRole;
 import teste.servicepack.security.logic.Transaction;
@@ -18,14 +19,14 @@ import teste.web.LoginServlet;
 
 public class ServicoSection {
 
-    private static final Logger logger = Logger.getLogger(ServicoSection.class);
+
+    private static final Logger logger = Logger.getLogger(ServicoComponentes.class);
 
     @isAuthenticated
     @HasRole(role="admin")
     @Transaction
     public JSONObject addSection(JSONObject section){
 
-        logger.info("ADICIONAR SECTIONS" +  section);
         long idPage = section.getLong("idPage");
         Page page = DaoFactory.createPageDao().load(idPage);
         SectionImpl s = SectionImpl.fromJson(section);
@@ -55,17 +56,21 @@ public class ServicoSection {
     @Transaction
     public JSONArray returnComponents(JSONObject dummy) throws JSONException
     {
-        Page page = DaoFactory.createPageDao().load(dummy.getLong("id"));
+        Page page = DaoFactory.createPageDao().load(dummy.getLong("idpag"));
         JSONArray resultados = new JSONArray();
 
+        logger.info("ESTE E O DUMMY " + dummy);
 
-        for(Section s: page.getSections())
-        {
-            for(Components c : s.getComponents()) {
-                resultados.put(new JSONObject(((ComponentsImpl) c).toJson()));
+        for(Section s: page.getSections()) {
+            logger.info("S getID " + s.getId());
+            logger.info("dummy ID " + dummy.getLong("id"));
+            logger.info(s.getId() == dummy.getLong("id"));
+            if (s.getId() == dummy.getLong("id")) {
+                for (Components c : s.getComponents()) {
+                    resultados.put(new JSONObject(((ComponentsImpl) c).toJson()));
+                }
             }
         }
-
         return resultados;
     }
 

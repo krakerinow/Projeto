@@ -18,10 +18,6 @@ public class DaoFactory
     {
         return PageDao.getInstance();
     }
-   /* public static ComponentsTextDao createComponentsTextDao()
-    {
-        return ComponentsTextDao.getInstance();
-    }*/
     public static ComponentsDao createComponentsDao()  { return ComponentsDao.getInstance(); }
 
 }

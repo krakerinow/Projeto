@@ -15,6 +15,8 @@ public class ComponentsImpl extends Components {
             .useRuntimeType(true)
             .include("id",Components.class)
             .include("path",Components.class)
+            .include("text",Components.class)
+            .include("idSection",Components.class)
             .create();
 
 
@@ -33,6 +35,7 @@ public class ComponentsImpl extends Components {
         return "Component{" +
                 "id=" + getId() +
                 ", path='" + getPath() +
+                ", text='" + getText() +
                 '}';
     }
 

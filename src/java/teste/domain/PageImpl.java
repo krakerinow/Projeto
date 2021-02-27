@@ -20,7 +20,8 @@ public class PageImpl extends Page {
             .include("title", Section.class)
             .include("id", Section.class)
             .include("components", Page.class)
-            .include("text", ComponentText.class)
+            .include("text", Components.class)
+            .include("path", Components.class)
             .include("id", Components.class)
             .create();
 
