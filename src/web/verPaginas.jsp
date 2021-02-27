@@ -1,5 +1,5 @@
-<%@ page import="teste.domain.SectionImpl"%>
-<%@ page import="teste.domain.ComponentsImpl" %>
+<%@ page import="teste.domain.SectionImpl" %>
+<%@ page import="teste.domain.PageImpl" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld"  prefix="html" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-nested.tld"  prefix="nested" %>
@@ -13,8 +13,7 @@
 
     <style>
         body{
-            background-color: #333333;
-            color: #ffffff;
+            background-color: silver;
         }
 
 
@@ -25,22 +24,21 @@
     String id = request.getParameter("id");
 %>
 
-<div id="myApp" ng-app="myApp" ng-controller="myCtrl">
-    <div ng-repeat="p in page" style="padding-bottom: 1em;">
-        <h2> {{ p.title }}</h2>
-    <div ng-repeat="s in p.sections" style="padding-bottom: 1em;">
-        listarComponentes(s);
+<div id="load" ng-app="load" ng-controller="ctrl">
+    <h2 class="title is-1 has-text-centered has-text-white">{{ page.title }}</h2>
+
+    <div ng-repeat="s in page.sections" style="padding-bottom: 1em;">
         <h2>Section Title.:</h2>
         <h3>{{ s.title }}</h3>
         <h2>Component.:</h2>
-        <div ng-repeat="c in s.components" style="padding-bottom: 1em;">
-
-            <h3>&nbsp;{{ c.text }}</h3>
+        <div ng-repeat="c in sections" style="padding-bottom: 1em;">
+            <h3>{{ c.text }}</h3>
+            <h3>{{ c.path }}</h3>
         </div>
+        <hr/>
     </div>
 </div>
-
-</div>
+</body>
 
 <script>
     function send(servico, metodo, data, callbackOk){
@@ -70,22 +68,24 @@
         });
     }
 
-    let app = angular.module("myApp", []);
-    app.controller("myCtrl", function($scope) {
+    let app = angular.module("load", []);
+    app.controller("ctrl", function($scope) {
 
-        $scope.id = <%=id%>;
+        $scope.pageid = <%=id%>;
         $scope.page = {
             sections: [
                 { components: [] }
             ]
         };
+        $scope.secId=[];
+
 
         $scope.loadPage = function(){
             send(
                 "Page.ServicoPage",
                 "loadPage",
                 {
-                    id: $scope.id,
+                    id: $scope.pageid,
                 },
                 function(result) {
                     $scope.page = result;
@@ -96,15 +96,14 @@
                     $scope.$apply();
                 }
             );
-        };
+        }
 
-        $scope.listarcomponents = function(s){
+        $scope.listarcomponents = function(){
             send(
                 "section.ServicoSection",
-                "returnComponents",
+                "Components",
                 {
-                    idpag: $scope.id,
-                    id:$scope.page.sections[s].id,
+                    idpag: $scope.pageid,
                 },
                 function(result)
                 {
@@ -114,10 +113,8 @@
             );
         }
 
-        for(var i=0;i<$scope.page.sections.length;i++){
-            $scope.listarcomponents();
-        }
         $scope.loadPage();
+        $scope.listarcomponents();
     });
 </script>
 </body>

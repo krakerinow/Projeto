@@ -56,10 +56,11 @@ public class ServicoSection {
     @Transaction
     public JSONArray returnComponents(JSONObject dummy) throws JSONException
     {
+        logger.info("este e o dummy"+dummy);
         Page page = DaoFactory.createPageDao().load(dummy.getLong("idpag"));
         JSONArray resultados = new JSONArray();
 
-        logger.info("este e o dummy"+dummy);
+
         for(Section s: page.getSections()) {
 
             if (s.getId() == dummy.getLong("id")) {
@@ -74,8 +75,29 @@ public class ServicoSection {
 
     @isAuthenticated
     @Transaction
+    public JSONArray Components(JSONObject dummy) throws JSONException
+    {
+
+        Page page = DaoFactory.createPageDao().load(dummy.getLong("idpag"));
+        JSONArray resultados = new JSONArray();
+
+
+        for(Section s: page.getSections()) {
+            for (Components c : s.getComponents()) {
+                resultados.put(new JSONObject(((ComponentsImpl) c).toJson()));
+                }
+            }
+
+        logger.info("este sao os resul"+resultados);
+        return resultados;
+    }
+
+
+    @isAuthenticated
+    @Transaction
     public JSONArray returnSections(JSONObject dummy) throws JSONException
     {
+        logger.info(dummy);
         Page page = DaoFactory.createPageDao().load(dummy.getLong("id"));
         JSONArray resultados = new JSONArray();
 
@@ -84,7 +106,7 @@ public class ServicoSection {
         {
                 resultados.put(new JSONObject(((SectionImpl) s).toJson()));
         };
-
+        logger.info(resultados);
         return resultados;
     }
 

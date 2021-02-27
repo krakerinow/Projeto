@@ -13,10 +13,12 @@ public class PageImpl extends Page {
             .exclude(Object.class)
             .useClassMetadata(true)
             .useRuntimeType(true)
-            .include("id",Page.class)
-            .include("title",Page.class)
-            .include("roles",Page.class)
-            .include("sections",Page.class)
+            .include("id", Page.class)
+            .include("title", Page.class)
+            .include("roles", Page.class)
+            //.include("user", Page.class)
+            .include("sections", Page.class)
+            .include("components", Page.class)
             .include("title", Section.class)
             .include("id", Section.class)
             .include("components", Page.class)
@@ -25,16 +27,35 @@ public class PageImpl extends Page {
             .include("id", Components.class)
             .create();
 
+    static Genson gensonSingle = new GensonBuilder()
+            .useMethods(true)
+            .useFields(false)
+            .exclude(Object.class)
+            .useClassMetadata(true)
+            .useRuntimeType(true)
+            .include("id", Page.class)
+            .include("title", Page.class)
+            .include("roles", Page.class)
+            //.include("user", Page.class)
+            .include("sections", Page.class)
+            .include("components", Section.class)
+            .include("title", Section.class)
+            .include("id", Section.class)
+            .include("components", Page.class)
+            .include("text", Components.class)
+            .include("path", Components.class)
+            .include("id", Components.class)
+            .create();
 
-    public static PageImpl fromJson(JSONObject jsonObject)
-    {
+    public static PageImpl fromJson(JSONObject jsonObject) {
         return genson.deserialize(jsonObject.toString(), PageImpl.class);
     }
 
-    public String toJson()
-    {
+    public String toJson() {
         return genson.serialize(this);
     }
+
+    public String toJsonSingle() { return gensonSingle.serialize(this); }
 
     @Override
     public String toString() {

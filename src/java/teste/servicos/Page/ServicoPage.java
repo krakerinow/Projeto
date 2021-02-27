@@ -1,5 +1,6 @@
 package teste.servicos.Page;
 
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONObject;
@@ -9,6 +10,7 @@ import teste.domain.UserSession;
 import teste.domain.dao.DaoFactory;
 import teste.servicepack.security.SecurityContextProvider;
 import teste.servicos.Logout.ServicoLogout;
+import teste.servicos.componentes.ServicoComponentes;
 import teste.utils.HibernateUtils;
 import teste.servicepack.security.logic.HasRole;
 import teste.servicepack.security.logic.Transaction;
@@ -16,10 +18,11 @@ import teste.servicepack.security.logic.isAuthenticated;
 import teste.web.LoginServlet;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 public class ServicoPage {
-    private static final java.util.logging.Logger logger = Logger.getLogger(String.valueOf(ServicoLogout.class));
+
+    private static final Logger logger = Logger.getLogger(ServicoPage.class);
+
     @isAuthenticated
     @HasRole(role="admin")
     @Transaction
@@ -55,11 +58,12 @@ public class ServicoPage {
     @Transaction
     public JSONObject loadPage(JSONObject page) {
 
+        logger.info("PAGE " + page);
         Long sId = page.getLong("id");
         PageImpl sPersistente = (PageImpl) DaoFactory.createPageDao().get(sId);
         JSONObject jsonObject = new JSONObject(sPersistente.toJson());
 
-        logger.info("jsonobj"+jsonObject);
+        logger.info(jsonObject);
         return jsonObject;
     }
 

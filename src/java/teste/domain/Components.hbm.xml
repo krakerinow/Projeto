@@ -4,7 +4,7 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="teste.domain.Components" table="Components" abstract="true">
+    <class name="teste.domain.Components" table="components" abstract="true">
         <meta attribute="scope-class">public abstract</meta>
 
         <id name="id" type="long">

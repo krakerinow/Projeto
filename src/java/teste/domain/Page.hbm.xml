@@ -4,7 +4,7 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="teste.domain.Page" table="Page" abstract="true">
+    <class name="teste.domain.Page" table="page" abstract="true">
         <meta attribute="scope-class">public abstract</meta>
 
         <id name="id" type="long">
@@ -15,7 +15,7 @@
         <timestamp source="db" name="updateDate" unsaved-value="null"/>
         <property name="title" type="string"/>
         <property name="roles" type="string"/>
-        <many-to-one name="user" class="teste.domain.User" column="owner" outer-join="true" cascade="none"/>
+        <many-to-one name="user" class="teste.domain.User" column="owner"/>
 
         <set name="sections" cascade="none">
             <key column="idPage"/>
