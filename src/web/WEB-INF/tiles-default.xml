@@ -17,42 +17,40 @@
     <definition name="page.home" extends="base.definition">
         <put name="title" value="Bem vindos"/>
         <put name="body" value="home.jsp"/>
-        <put name="footer" value="null.jsp"/>
     </definition>
 
     <definition name="page.login" extends="base.definition">
         <put name="title" value="Autenticação"/>
         <put name="body" value="login.jsp"/>
-        <put name="footer" value="null.jsp"/>
     </definition>
 
     <definition name="page.user" extends="base.definition">
         <put name="title" value="Utilizadores"/>
         <put name="body" value="user.jsp"/>
-        <put name="footer" value="null.jsp"/>
     </definition>
 
     <definition name="page.page" extends="base.definition">
         <put name="title" value="Paginas"/>
         <put name="body" value="page.jsp"/>
-        <put name="footer" value="null.jsp"/>
     </definition>
 
     <definition name="page.editPage" extends="base.definition">
         <put name="title" value="Editar"/>
         <put name="body" value="editPage.jsp"/>
-        <put name="footer" value="null.jsp"/>
     </definition>
 
     <definition name="page.editSection" extends="base.definition">
         <put name="title" value="Editar"/>
         <put name="body" value="editSection.jsp"/>
-        <put name="footer" value="null.jsp"/>
     </definition>
     <definition name="page.verPaginas" extends="base.definition">
         <put name="title" value="Ver Paginas"/>
         <put name="body" value="verPaginas.jsp"/>
-        <put name="footer" value="null.jsp"/>
+    </definition>
+
+    <definition name="page.addimg" extends="base.definition">
+        <put name="title" value="Adicionar imagens"/>
+        <put name="body" value="addimg.jsp"/>
     </definition>
 
 

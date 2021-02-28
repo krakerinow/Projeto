@@ -33,7 +33,9 @@
                     </h4>
                 </div>
                 <div id="collapse1" class="panel-collapse collapse in" ng-repeat="c in s.components">
-                    <div class="panel-body" style="text-align: center">{{c.text}}
+                    <div class="panel-body" style="text-align: center">{{c.text}}</div>
+                    <div ng-if="c.path" class="panel-body" style="text-align: center">
+                        <img src="imagens/{{c.path}}"/>
                     </div>
                 </div>
             </div>

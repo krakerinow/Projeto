@@ -17,6 +17,7 @@
         <action path="/editPage" forward="page.editPage"/>
         <action path="/editSection" forward="page.editSection"/>
         <action path="/verPaginas" forward="page.verPaginas"/>
+        <action path="/addimg" forward="page.addimg"/>
 
     </action-mappings>
 

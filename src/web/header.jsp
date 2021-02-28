@@ -56,6 +56,7 @@
         <li>  <a id="home" class="navbar-item" href="<%=request.getContextPath()%>/home.do">Home</a></li>
         <li>  <a id="pages" class="navbar-item" href="<%=request.getContextPath()%>/page.do">Pages</a></li>
         <li>  <a id="users" class="navbar-item" href="<%=request.getContextPath()%>/user.do">Users</a></li>
+        <li> <a id="img" class="navbar-item"  href="<%=request.getContextPath()%>/addimg.do">Adicionar imagens</a></li>
         <li> <a id="login" class="navbar-item"  href="<%=request.getContextPath()%>/login.do">Login</a></li>
         <li> <a id="logout" class="navbar-item" style="display: none;" onclick="document.getElementById('logoutForm').submit();">Logout</a></li>
     </ul>
@@ -76,12 +77,14 @@
             $("#home").css("display", "");
             $("#pages").css("display", "");
             $("#users").css("display", "");
+            $("#img").css("display", "");
         } else {
             $("#logout").css("display", "none");
             $("#home").css("display", "none");
             $("#login").css("display", "");
             $("#pages").css("display", "none");
             $("#users").css("display", "none");
+            $("#img").css("display", "none");
         }
     })
 </script>

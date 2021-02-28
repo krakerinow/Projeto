@@ -24,6 +24,11 @@
     </filter-mapping>
 
     <servlet>
+        <servlet-name>UploadServlet</servlet-name>
+        <servlet-class>teste.web.UploadServlet</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>teste.web.LoginServlet</servlet-class>
     </servlet>
@@ -65,6 +70,11 @@
     <servlet-mapping>
         <servlet-name>action</servlet-name>
         <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>UploadServlet</servlet-name>
+        <url-pattern>/UploadServlet</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
